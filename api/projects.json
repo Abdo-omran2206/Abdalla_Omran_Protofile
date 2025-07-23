@@ -1,0 +1,56 @@
+[
+    {
+        "name": "Administration Panal",
+        "description": "A financial administration panel that allows users to track payments, calculate balances, manage financial records, and search transactions.",
+        "livedimo":true,
+        "livedimourl": "https://abdo-omran2206.github.io/Administration_Panal/",
+        "sourse":true,
+        "github": "https://github.com/Abdo-omran2206/Administration_Panal",
+        "tecuse": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+        "name": "Noble Plate",
+        "description": "Noble Plate is a modern, responsive restaurant website that highlights fine dining with elegant design and easy navigation. It offers users an engaging look at the restaurant’s brand, menu, and ambiance.",
+        "livedimo":true,
+        "livedimourl": "https://abdo-omran2206.github.io/Noble_Plate/",
+        "sourse":true,
+        "github": "https://github.com/Abdo-omran2206/Noble_Plate",
+        "tecuse": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+        "name": "EchoPress",
+        "description": "EchoPress is a modern, responsive blog website that emphasizes clean design and user-friendly navigation. It provides an engaging platform for users to explore various topics, read articles, and interact with content.",
+        "livedimo":true,
+        "livedimourl": "https://abdo-omran2206.github.io/EchoPress/",
+        "sourse":true,
+        "github": "https://github.com/Abdo-omran2206/EchoPress",
+        "tecuse": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+        "name": "ATOM Hospital",
+        "description": "ATOM-Hospital is a project for managing hospital operations, including patient and staff management, appointment scheduling, and healthcare workflows.",
+        "livedimo":true,
+        "livedimourl": "https://atom-hospital.ct.ws/",
+        "sourse":true,
+        "github": "https://github.com/Abdo-omran2206/ATOM-Hospital",
+        "tecuse": ["HTML", "CSS", "JavaScript","PHP","jquery", "MySQL"]
+    },
+    {
+        "name": "Coffee Break",
+        "description": "Coffee Break - Cozy Coffee Shop Website is a modern, responsive website designed for a coffee shop, featuring an elegant layout, menu display, and user-friendly navigation. It provides an inviting online presence for coffee enthusiasts.",
+        "livedimo":true,
+        "livedimourl": "https://coffee-break.ct.ws/",
+        "sourse":true,
+        "github": "https://github.com/Abdo-omran2206/coffee-break",
+        "tecuse": ["HTML", "CSS", "JavaScript" ,"PHP","jquery", "MySQL"]
+    },
+    {
+        "name": "qrcode-gen-master",
+        "description": "qrcode-gen-master is a web application that allows users to generate QR codes easily. It features a user-friendly interface and supports various customization options for QR codes.",
+        "livedimo":true,
+        "livedimourl": "https://qrcode-gen-master.netlify.app/",
+        "sourse":true,
+        "github": "https://github.com/Abdo-omran2206/qrcode-gen-master",
+        "tecuse": ["React", "Node.js", "Next.js"]
+    }
+]
