@@ -12,7 +12,7 @@
         "name": "Noble Plate",
         "description": "Noble Plate is a modern, responsive restaurant website that highlights fine dining with elegant design and easy navigation. It offers users an engaging look at the restaurant’s brand, menu, and ambiance.",
         "livedimo":true,
-        "livedimourl": "https://abdo-omran2206.github.io/Noble_Plate/",
+        "livedimourl": "https://abdo-omran2206.github.io/Noble_Plate/", 
         "sourse":true,
         "github": "https://github.com/Abdo-omran2206/Noble_Plate",
         "tecuse": ["HTML", "CSS", "JavaScript"]
