@@ -3,6 +3,7 @@ import DotGrid from './reactbits/DotGrid';
 import TextType from './reactbits/TextType';
 import { FaGithub, FaLinkedin} from "react-icons/fa";
 import { SiWhatsapp } from "react-icons/si"; // from Simple Icons
+import About from "./components/about";
 export default function Home() {
   return (
     <>
@@ -55,6 +56,9 @@ export default function Home() {
               <Image src='/profile.png' alt='profile picture' height={350} width={350} className='w-80 h-80 rounded-full relative z-20 hover:cursor-pointer hover:scale-115 hover:rotate-10 transition-transform duration-600' priority/>
             </div>
           </div>
+        </section>
+        <section id="About" className='h-auto flex items-center justify-center relative overflow-hidden'>
+          <About />
         </section>
       </main>
     </>
