@@ -4,6 +4,7 @@ import TextType from './reactbits/TextType';
 import { FaGithub, FaLinkedin} from "react-icons/fa";
 import { SiWhatsapp } from "react-icons/si"; // from Simple Icons
 import About from "./components/about";
+import Portfolio from './components/Portfolio';
 export default function Home() {
   return (
     <>
@@ -59,6 +60,9 @@ export default function Home() {
         </section>
         <section id="About" className='h-auto flex items-center justify-center relative overflow-hidden'>
           <About />
+        </section>
+        <section id="Portfolio" className='h-auto flex items-center justify-center relative overflow-hidden'>
+          <Portfolio />
         </section>
       </main>
     </>
