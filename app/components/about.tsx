@@ -1,44 +1,68 @@
+"use client";
 import Image from 'next/image';
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function About() {
+  const cardRef = useRef(null);
+  const Head = useRef(null);
+  const Headp = useRef(null);
+  const ImageRef = useRef(null);
+  const TextRef = useRef(null);
+  useEffect(() => {
+    const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    tl.fromTo(Head.current, { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power2.out", })
+      .fromTo(Headp.current, { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out", })
+      .fromTo(ImageRef.current, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: "power2.out", },)
+      .fromTo(TextRef.current, { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power2.out", }, "-=0.5");
+  }, []);
   return (
-    <div className="w-screen h-auto px-6 py-16 flex flex-col items-center">
+    <div ref={cardRef} className="w-screen h-auto px-6 py-16 flex flex-col items-center">
       {/* Heading */}
-      <h2 className="text-4xl md:text-5xl font-bold text-center text-white mb-5">About Me</h2>
+      <h2 ref={Head} className="text-4xl md:text-5xl font-bold text-center text-white mb-5">About Me</h2>
       {/* Tagline */}
-      <p className="text-xl text-gray-200 leading-relaxed max-w-3xl text-center mb-20">
+      <p ref={Headp} className="text-md text-gray-200 leading-relaxed max-w-3xl text-center mb-20">
         Turning ideas into immersive, high‑performance experiences
       </p>
 
       {/* Split Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl w-full mx-auto">
+      <div className="flex flex-row gap-12 max-w-7xl w-screen justify-center items-center">
         {/* Left: Image */}
-        <div className="flex justify-center lg:justify-start order-1 lg:order-none">
-          <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-white/5 backdrop-blur-sm p-2 flex justify-center items-center">
+        <div ref={ImageRef} className="flex justify-center">
+          <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-white/5 backdrop-blur-sm p-2 flex justify-center items-center hover:shadow-2xl hover:shadow-white/50 transition duration-500 ">
             <Image
               src="/profile.png"
               alt="profile picture"
               height={420}
               width={420}
-              className="w-full max-w-[500px] h-auto rounded-xl object-cover hover:scale-[1.5] transition-transform duration-300"
+              className="w-200 h-full rounded-xl object-cover hover:scale-[1.05] transition-transform duration-300"
               priority
             />
           </div>
         </div>
 
         {/* Right: Text */}
-        <div className="flex flex-col space-y-8">
+        <div ref={TextRef} className="flex flex-col space-y-8">
           {/* Intro */}
           <div>
             <h3 className="text-2xl md:text-3xl font-semibold text-white mb-2">Who I am</h3>
-            <p className="text-xl text-gray-300 leading-relaxed text-left">
+            <p className="text-md text-gray-300 leading-relaxed text-left">
                 I’m a <span className="font-semibold text-white">Frontend Developer and Video Editor </span> 
                 passionate about creating fast, engaging digital experiences. I blend design 
                 sense with engineering to build responsive, accessible interfaces that feel 
                 polished and alive, complete with fluid animations and interactivity.
             </p>
 
-            <p className="text-xl text-gray-300 leading-relaxed text-left mt-2">
+            <p className="text-md text-gray-300 leading-relaxed text-left mt-2">
                 With a focus on <span className="font-medium text-white">performance</span>, 
                 clean architecture, and pixel-perfect execution, I ensure products work 
                 seamlessly across devices. Beyond code, I craft video edits that balance 
@@ -46,7 +70,7 @@ function About() {
                 with clarity.
             </p>
 
-            <p className="text-xl text-gray-300 leading-relaxed text-left mt-2">
+            <p className="text-md text-gray-300 leading-relaxed text-left mt-2">
                 Whether coding an interface or producing a cinematic cut, I adapt style and 
                 technique to the goal, always aiming to deliver work that feels both 
                 <span className="italic text-white"> creative and precise</span>.
@@ -56,7 +80,7 @@ function About() {
 
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-6 justify-start">
-            <a href="/abdalla_cv.pdf" target='_blank'>
+            <a href="https://drive.google.com/file/d/1EfY2wqWA4FtBkZfCZ1zslMHO2kii6mLB/view?usp=drive_link" target='_blank'>
                 <button className="group bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                     <span className="flex items-center gap-2">
                         <svg className="w-5 h-5 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
