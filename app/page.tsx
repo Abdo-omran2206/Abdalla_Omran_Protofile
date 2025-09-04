@@ -65,10 +65,16 @@ export default function Home() {
         <section id="Portfolio" className='h-auto flex items-center justify-center relative overflow-hidden'>
           <Portfolio />
         </section>
+        <hr className='border-t border-cyan-800 my-8'/>
         <section id="Contact" className='h-auto flex items-center justify-center relative overflow-hidden'>
           <Contact />
         </section>
       </main>
+      <footer>
+        <div className="w-full text-center py-6 bg-gray-900 text-gray-400 text-sm">
+          &copy; {new Date().getFullYear()} Abdalla Omran. All rights reserved. • Built with React & Tailwind CSS
+        </div>
+      </footer>
     </>
   );
 }
