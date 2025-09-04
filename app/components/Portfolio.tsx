@@ -1,20 +1,22 @@
 'use client'
-import { useState , useEffect } from "react";
+import { useState , useEffect , useRef} from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiGlobe, FiVideo, FiCpu , FiGithub , FiZap} from "react-icons/fi";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import  * as Icons from "react-icons/si";
 import Image from 'next/image';
 
 interface Project {
-    name: string;
-    description: string;
-    livedimo: boolean;
-    livedimourl?: string;
-    sourse: boolean;
-    github?: string;
-    tecuse?: string[];
-    image:string;
-    // Add more fields as needed
+  name: string;
+  description: string;
+  livedimo: boolean;
+  livedimourl?: string;
+  sourse: boolean;
+  github?: string;
+  tecuse?: string[];
+  image:string;
+  // Add more fields as needed
 }
 interface Tech {
     name: string;
@@ -22,53 +24,120 @@ interface Tech {
     // Add more fields as needed
 }
 interface Video {
-    title: string;
-    videoId: string;
-    // Add more fields as needed
+  title: string;
+  videoId: string;
+  // Add more fields as needed
 }
+gsap.registerPlugin(ScrollTrigger);
 
 function Portfolio(){
     const [ state , setState ] = useState("Web");
     const [ data , setData ] = useState<Array<Project | Tech | Video>>([]);
+    const [ loading , setLoading ] = useState<boolean>(false);
+    const [ error , setError ] = useState<string | null>(null);
+
+    const cardRef = useRef(null);
+    const Head = useRef(null);
+    const Headp = useRef(null);
+    const Nav = useRef(null);
+    const contentRef = useRef<HTMLDivElement | null>(null);
+
     useEffect(() =>{
-        // Fetch data or perform actions based on the current state
-        if(state === "Web"){
-            fetch('/api/web-projects.json').then(response => response.json()).then(data => {
-                console.log(data);
-                setData(data);
+      const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: cardRef.current,
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+              },
             });
-        } else if(state === "Video"){
-            fetch('/api/video-projects.json').then(response => response.json()).then(data => {
-                console.log(data);
-                setData(data);
-            });
-        } else if(state === "Tech"){
-            fetch('/api/tech-stack.json').then(response => response.json()).then(data => {
-                console.log(data);
-                setData(data);
-            });
+      
+      tl.fromTo(Head.current, { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, ease: "power2.out", })
+      .fromTo(Headp.current, { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power2.out", }, "-=1")
+      .fromTo(Nav.current, { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power2.out", }, "-=0.5")
+      
+    },[])
+    useEffect(() => {
+      if(!loading && !error && contentRef.current){
+        gsap.fromTo(
+          contentRef.current,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
+        );
+      }
+    }, [state, loading, error])
+    
+    const fetchData = async (currentState: string) => {
+        try{
+            setLoading(true);
+            setError(null);
+            let url = '';
+            if(currentState === "Web"){ url = '/api/web-projects.json'; }
+            else if(currentState === "Video"){ url = '/api/video-projects.json'; }
+            else if(currentState === "Tech"){ url = '/api/tech-stack.json'; }
+
+            if(!url){
+                setData([]);
+                return;
+            }
+
+            const response = await fetch(url);
+            if(!response.ok){
+                throw new Error(`Failed to load: ${response.status}`);
+            }
+            const result = await response.json();
+            setData(result);
+        }catch(err : any){
+            setError(err?.message || 'Failed to load data');
+            setData([]);
+        }finally{
+            setLoading(false);
         }
+    };
+
+    useEffect(() =>{
+        fetchData(state);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[state])
+    const nav = "relative flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl scale-105 text-white shadow-xl \
+             before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%] \
+             before:w-full before:h-1 before:bg-cyan-600 before:origin-center before:scale-x-0 \
+             before:transition-transform before:duration-500 hover:before:scale-x-100";
+    const navActive = "flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl scale-105 before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%] before:w-full before:h-1 before:bg-cyan-600 text-white shadow-xl";
     return(
-        <div className="w-screen h-auto py-20">
-            <h2 className="text-5xl text-center text-white mb-3">Portfolio Showcase</h2>
-            <p className="text-center">Explore my journey through projects, certifications, and technical expertise. Each section represents a milestone in my continuous learning path.</p>
-            <div className="flex justify-center p-10">
+        <div ref={cardRef} className="w-screen min-h-screen h-auto py-20">
+            <h2 ref={Head} className="text-5xl text-center text-white mb-3">Portfolio Showcase</h2>
+            <p ref={Headp} className="text-center">Explore my journey through projects, certifications, and technical expertise. Each section represents a milestone in my continuous learning path.</p>
+            <div ref={Nav} className="flex justify-center p-10">
                 <ul className="flex flex-row px-20 py-5 gap-20 text-2xl font-bold rounded-2xl 
                    text-white bg-white/10 backdrop-blur-md shadow-lg border border-white/20">
-                    <li onClick={() => setState("Web")} className="flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl transition-all duration-300 hover:bg-white/20 hover:shadow-xl hover:scale-105">
+                    <li onClick={async () => {
+                        if(contentRef.current){
+                            await gsap.to(contentRef.current, { opacity: 0, y: 10, duration: 0.25, ease: 'power2.out' });
+                        }
+                        setState("Web");
+                    }} className={state === "Web" ? navActive : nav}>
                         <FiGlobe className="text-blue-400" /> <span>Web Projects</span>
                     </li>
-                    <li onClick={() => setState("Video")} className="flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl transition-all duration-300 hover:bg-white/20 hover:shadow-xl hover:scale-105">
-                            <FiVideo className="text-red-400" /> <span>Video Projects</span>
+                    <li onClick={async () => {
+                        if(contentRef.current){
+                            await gsap.to(contentRef.current, { opacity: 0, y: 10, duration: 0.25, ease: 'power2.out' });
+                        }
+                        setState("Video");
+                    }} className={state === "Video" ? navActive : nav}>
+                          <FiVideo className="text-red-400" /> <span>Video Projects</span>
                         </li>
-                    <li onClick={() => setState("Tech")} className="flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl transition-all duration-300 hover:bg-white/20 hover:shadow-xl hover:scale-105">
+                    <li onClick={async () => {
+                        if(contentRef.current){
+                            await gsap.to(contentRef.current, { opacity: 0, y: 10, duration: 0.25, ease: 'power2.out' });
+                        }
+                        setState("Tech");
+                    }} className={state === "Tech" ? navActive : nav}>
                         <FiCpu className="text-green-400 block"/> <span>Tech Stack</span>
                     </li>
                 </ul>
             </div>
-            <div>
-                {state === "Web" ? (
+            <div ref={contentRef} className="will-change-transform">
+                { state === "Web" ? (
                     <RenderWebApp
                         data={data.filter(
                             (item): item is Project =>
@@ -110,6 +179,56 @@ export default Portfolio;
 
 
 function RenderWebApp({ data } : { data: Array<Project> }) {
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray<HTMLElement>('.portfolio-card').forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+            delay: i * 0.08,
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+      });
+    });
+    return () => ctx.revert();
+  }, [data]);
+
+  useEffect(() => {
+    const cards = document.querySelectorAll<HTMLElement>('.portfolio-card');
+    const enter = (el: HTMLElement) => {
+      gsap.to(el, { scale: 1.03, y: -4, duration: 0.2, ease: 'power2.out' });
+    };
+    const leave = (el: HTMLElement) => {
+      gsap.to(el, { scale: 1, y: 0, duration: 0.25, ease: 'power2.out' });
+    };
+    cards.forEach((card) => {
+      const onEnter = () => enter(card);
+      const onLeave = () => leave(card);
+      card.addEventListener('mouseenter', onEnter);
+      card.addEventListener('mouseleave', onLeave);
+      (card as any).__enterHandler = onEnter;
+      (card as any).__leaveHandler = onLeave;
+    });
+    return () => {
+      cards.forEach((card) => {
+        const onEnter = (card as any).__enterHandler;
+        const onLeave = (card as any).__leaveHandler;
+        card.removeEventListener('mouseenter', onEnter);
+        card.removeEventListener('mouseleave', onLeave);
+      });
+    };
+  }, [data]);
+
   return (
     <>
       {data ? (
@@ -117,7 +236,7 @@ function RenderWebApp({ data } : { data: Array<Project> }) {
           {data.map((item, index) => (
             <div
               key={index}
-              className="bg-[#0d1117] transition rounded-xl shadow-lg hover:bg-[#19212e]"
+              className="portfolio-card bg-[#0d1117] transition rounded-xl shadow-lg hover:bg-[#19212e] will-change-transform"
             >
               {/* Card Image */}
               {item.image && (
@@ -203,10 +322,54 @@ function RenderWebApp({ data } : { data: Array<Project> }) {
 }
 
 function RenderVideoApp({ data } : { data: Array<Video> }) {
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.utils.toArray<HTMLElement>('.video-card').forEach((card, i) => {
+                gsap.fromTo(
+                    card,
+                    { y: 30, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.6,
+                        ease: 'power2.out',
+                        delay: i * 0.08,
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    }
+                );
+            });
+        });
+        return () => ctx.revert();
+    }, [data]);
+    useEffect(() => {
+        const cards = document.querySelectorAll<HTMLElement>('.video-card');
+        const enter = (el: HTMLElement) => gsap.to(el, { scale: 1.02, duration: 0.2, ease: 'power2.out' });
+        const leave = (el: HTMLElement) => gsap.to(el, { scale: 1, duration: 0.25, ease: 'power2.out' });
+        cards.forEach((card) => {
+            const onEnter = () => enter(card);
+            const onLeave = () => leave(card);
+            card.addEventListener('mouseenter', onEnter);
+            card.addEventListener('mouseleave', onLeave);
+            (card as any).__enterHandler = onEnter;
+            (card as any).__leaveHandler = onLeave;
+        });
+        return () => {
+            cards.forEach((card) => {
+                const onEnter = (card as any).__enterHandler;
+                const onLeave = (card as any).__leaveHandler;
+                card.removeEventListener('mouseenter', onEnter);
+                card.removeEventListener('mouseleave', onLeave);
+            });
+        };
+    }, [data]);
     return(
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10">
             {data.map((item, i) => (
-                <div key={i} className="rounded-xl overflow-hidden shadow-lg">
+                <div key={i} className="video-card rounded-xl overflow-hidden shadow-lg will-change-transform">
                 <iframe
                     width="100%"
                     height="315"
@@ -223,6 +386,50 @@ function RenderVideoApp({ data } : { data: Array<Video> }) {
 }
 
 function RenderTechStack({data} : {data: Array<Tech>}){
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.utils.toArray<HTMLElement>('.tech-card').forEach((card, i) => {
+                gsap.fromTo(
+                    card,
+                    { y: 20, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.5,
+                        ease: 'power2.out',
+                        delay: i * 0.05,
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 90%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    }
+                );
+            });
+        });
+        return () => ctx.revert();
+    }, [data]);
+    useEffect(() => {
+        const cards = document.querySelectorAll<HTMLElement>('.tech-card');
+        const enter = (el: HTMLElement) => gsap.to(el, { scale: 1.05, duration: 0.15, ease: 'power2.out' });
+        const leave = (el: HTMLElement) => gsap.to(el, { scale: 1, duration: 0.2, ease: 'power2.out' });
+        cards.forEach((card) => {
+            const onEnter = () => enter(card);
+            const onLeave = () => leave(card);
+            card.addEventListener('mouseenter', onEnter);
+            card.addEventListener('mouseleave', onLeave);
+            (card as any).__enterHandler = onEnter;
+            (card as any).__leaveHandler = onLeave;
+        });
+        return () => {
+            cards.forEach((card) => {
+                const onEnter = (card as any).__enterHandler;
+                const onLeave = (card as any).__leaveHandler;
+                card.removeEventListener('mouseenter', onEnter);
+                card.removeEventListener('mouseleave', onLeave);
+            });
+        };
+    }, [data]);
     return(
         <>
             <div className="mt-4 flex flex-col items-center justify-center">
@@ -239,7 +446,7 @@ function RenderTechStack({data} : {data: Array<Tech>}){
                     return (
                         <div
                         key={i}
-                        className="flex flex-col items-center justify-center gap-3 py-7 px-13 rounded-xl border border-cyan-600 bg-[#0d1117] text-cyan-400 shadow-md hover:shadow-cyan-400/50 hover:scale-105 transition duration-300 hover:cursor-pointer"
+                        className="tech-card flex flex-col items-center justify-center gap-3 py-7 px-13 rounded-xl border border-cyan-600 bg-[#0d1117] text-cyan-400 shadow-md hover:shadow-cyan-400/50 hover:scale-105 transition duration-300 hover:cursor-pointer will-change-transform"
                         >
                         {Icon && <Icon size={40} className="text-cyan-400" />}
                         <span className="font-medium text-sm">{tech.name}</span>
