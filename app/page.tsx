@@ -1,3 +1,6 @@
+"use client";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import Image from 'next/image';
 import DotGrid from './reactbits/DotGrid';
 import TextType from './reactbits/TextType';
@@ -82,13 +85,22 @@ export default function Home() {
 
 
 export function Navbar(){
+  const item = "relative text-gary-200 overflow-hidden transition-all duration-300 ease-in-out p-3 m-1 cursor-pointer \
+before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%] \
+before:w-0 before:h-1 before:bg-cyan-600 before:transition-all before:duration-300 before:ease-in-out \
+hover:before:w-full hover:text-white hover:text-shadow-lg/20 hover:text-shadow-white max-sm:px-2";
+
+  const nav = useRef(null);
+  useEffect(() => {
+    gsap.fromTo(nav.current, { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" });
+  }, []);
   return(
-    <nav className="backdrop-blur-md bg-white/10 border border-white/20 shadow-lg w-auto flex fixed px-15 py-3 rounded-4xl mt-15">
-      <ul className="flex gap-20 text-white font-bold text-xl">
-        <li><a href="#Home">Home</a></li>
-        <li><a href="#About">About</a></li>
-        <li><a href="#Portfolio">Portfolio</a></li>
-        <li><a href="#Contact">Contact</a></li>
+    <nav ref={nav} className="fixed  top-5 left-1/2 -translate-x-1/2 px-10 py-3 bg-transparent backdrop-blur-lg rounded-3xl border border-gray-700 z-50 max-sm:px-3 opacity-0">
+      <ul className="flex gap-20 font-bold text-xl">
+        <li><a href="#Home" className={item}>Home</a></li>
+        <li><a href="#About" className={item}>About</a></li>
+        <li><a href="#Portfolio" className={item}>Portfolio</a></li>
+        <li><a href="#Contact" className={item}>Contact</a></li>
       </ul>
     </nav>
   )
