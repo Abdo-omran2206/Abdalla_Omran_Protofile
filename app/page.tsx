@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import Image from 'next/image';
 import DotGrid from './reactbits/DotGrid';
 import TextType from './reactbits/TextType';
 import { FaGithub, FaLinkedin} from "react-icons/fa";
@@ -9,59 +8,80 @@ import { SiWhatsapp } from "react-icons/si"; // from Simple Icons
 import About from "./components/about";
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
+
+
 export default function Home() {
+  
+  const text1 = useRef(null);
+  const text2 = useRef(null);
+  useEffect(() => {
+    const tl = gsap.timeline();
+    tl.fromTo(text1.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" });
+    tl.fromTo(text2.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" }, "-=0.1" );
+  },[])
   return (
     <>
       <header className="flex justify-center items-center">
         <Navbar />
       </header>
-      <main >
+      <main className="bg-gradient-to-b from-black via-gray-900 to-black min-h-screen flex flex-col gap-15">
+        
         <section id="Home" className="h-screen flex items-center justify-center relative overflow-hidden">
           <DotGrid
             dotSize={5}
             gap={15}
             baseColor="#271E37"
-            activeColor="#5227FF"
+            activeColor="#a05dff"
             proximity={120}
             shockRadius={250}
             shockStrength={5}
             resistance={750}
             returnDuration={1.5}
           />
-          <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-between z-10 px-6 md:px-12 h-screen gap-4 md:gap-0 lg:gap-10">
-            <div className='w-full md:w-3/5 z-20 text-left px-6 md:pl-12 lg:pl-20 max-w-2xl'>
-              <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight lg:leading-[1.1]">Hi, I&apos;m Abdalla Omran</h1>
-              <p className="text-white text-xl lg:text-xl font-medium mb-6">Full-Stack Developer & Video Editor</p>
-              <TextType 
-                text={[
-                  "Building full-stack web applications",
-                  "Creating cinematic video content",
-                  "Crafting seamless user experiences", 
-                  "From code to creative storytelling"
-                ]}
-                typingSpeed={30}
-                pauseDuration={2500}
-                deletingSpeed={35}
-                showCursor={true}
-                cursorCharacter="█"
-                className='text-lg'
-              />
-
-              <div className='flex flex-col gap-8'>
-                <div className="mt-10 lg:mt-12 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-start flex-wrap">
-                <a href="#Portfolio" className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition">View Portfolio</a>
-                <a href="#Contact" className="px-6 py-3 rounded-full border border-white text-white font-semibold hover:bg-white/10 transition">Contact Me</a>
+          
+          <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-center z-10 px-6 md:px-12 h-screen gap-4 md:gap-0 lg:gap-10">
+            <div className='w-full z-20 px-6 flex flex-col justify-center items-center text-center'>
+              <div ref={text1} className="opacity-0">
+                <h1 className="text-gray-200 text-2xl font-bold mb-4 leading-tight lg:leading-[1.1]">Hello, I&apos;m</h1>
+                <h1 className="text-white text-7xl mb-4 leading-tight lg:leading-[1.1]">Abdalla Omran</h1>
+                <TextType 
+                  text={[
+                    "Full-Stack Developer",
+                    "Video Editor",
+                  ]}
+                  typingSpeed={30}
+                  pauseDuration={2500}
+                  deletingSpeed={35}
+                  showCursor={true}
+                  cursorCharacter="█"
+                  className='text-3xl mt-2 mb-5'
+                />
+                <p className="text-white text-xl font-medium">Transforming Ideas Into Reality</p>
               </div>
-              <div className="flex items-center gap-4 text-white/90 mt-2 sm:mt-0">
+              <div className='flex flex-col gap-8 opacity-0' ref={text2}>
+                <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-start flex-wrap">
+                <a href="#Portfolio" className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/0 hover:text-white hover:border-white hover:border duration-300 transition">View Portfolio</a>
+                <a
+                  href="#Contact"
+                  className="relative px-6 py-3 rounded-full border border-white text-white font-semibold 
+                            overflow-hidden transition-colors duration-300
+                            before:content-[''] before:absolute before:inset-0 before:bg-white 
+                            before:scale-x-0 before:origin-left before:transition-transform before:duration-300
+                            hover:before:scale-x-100 hover:text-black"
+                >
+                  <span className="relative z-10">Contact Me</span>
+                </a>
+
+              </div>
+              <div className="flex items-center justify-center gap-4 text-white/90 mt-2 sm:mt-0">
                 <SocialLinks />
               </div>
               </div>
             </div>
-            <div className='w-full md:w-2/5 flex justify-center items-center relative px-5 md:pr-12 lg:pr-20'>
-              <Image src='/profile.png' alt='profile picture' height={350} width={350} className='w-80 h-80 rounded-full relative z-20 hover:cursor-pointer hover:scale-115 hover:rotate-10 transition-transform duration-600' priority/>
-            </div>
           </div>
+
         </section>
+
         <section id="About" className='h-auto flex items-center justify-center relative overflow-hidden'>
           <About />
         </section>
@@ -109,10 +129,10 @@ hover:before:w-full hover:text-white hover:text-shadow-lg/20 hover:text-shadow-w
 export function SocialLinks() {
   return (
     <div className="flex justify-center">
-      <div className="flex space-x-6 px-6 py-4 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-xl gap-5">
+      <div className="flex space-x-6 px-8 py-4 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-xl gap-5">
         {/* GitHub */}
         <a
-          href="https://github.com/your-username"
+          href="https://github.com/Abdo-omran2206"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-300 hover:text-white transform hover:scale-110 transition duration-300"
@@ -122,7 +142,7 @@ export function SocialLinks() {
 
         {/* LinkedIn */}
         <a
-          href="https://linkedin.com/in/your-username"
+          href="https://www.linkedin.com/in/abdalla-omran-388572361/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-300 hover:text-blue-500 transform hover:scale-110 transition duration-300"
@@ -132,7 +152,7 @@ export function SocialLinks() {
 
         {/* WhatsApp */}
         <a
-          href="https://wa.me/201234567890"
+          href="https://wa.me/201155395273"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-300 hover:text-green-500 transform hover:scale-110 transition duration-300"
