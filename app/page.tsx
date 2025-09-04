@@ -31,7 +31,7 @@ export default function Home() {
             dotSize={5}
             gap={15}
             baseColor="#271E37"
-            activeColor="#a05dff"
+            activeColor="#1ac6ff"
             proximity={120}
             shockRadius={250}
             shockStrength={5}
@@ -115,7 +115,7 @@ hover:before:w-full hover:text-white hover:text-shadow-lg/20 hover:text-shadow-w
     gsap.fromTo(nav.current, { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" });
   }, []);
   return(
-    <nav ref={nav} className="fixed  top-5 left-1/2 -translate-x-1/2 px-10 py-3 bg-transparent backdrop-blur-lg rounded-3xl border border-gray-700 z-50 max-sm:px-3 opacity-0">
+    <nav ref={nav} className="fixed  top-5 left-1/2 -translate-x-1/2 px-10 py-3 bg-transparent backdrop-blur-lg rounded-3xl border border-gray-700 z-50 opacity-0">
       <ul className="flex gap-20 font-bold text-xl">
         <li><a href="#Home" className={item}>Home</a></li>
         <li><a href="#About" className={item}>About</a></li>
