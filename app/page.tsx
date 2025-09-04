@@ -5,13 +5,14 @@ import { FaGithub, FaLinkedin} from "react-icons/fa";
 import { SiWhatsapp } from "react-icons/si"; // from Simple Icons
 import About from "./components/about";
 import Portfolio from './components/Portfolio';
+import Contact from './components/Contact';
 export default function Home() {
   return (
     <>
       <header className="flex justify-center items-center">
         <Navbar />
       </header>
-      <main>
+      <main >
         <section id="Home" className="h-screen flex items-center justify-center relative overflow-hidden">
           <DotGrid
             dotSize={5}
@@ -63,6 +64,9 @@ export default function Home() {
         </section>
         <section id="Portfolio" className='h-auto flex items-center justify-center relative overflow-hidden'>
           <Portfolio />
+        </section>
+        <section id="Contact" className='h-auto flex items-center justify-center relative overflow-hidden'>
+          <Contact />
         </section>
       </main>
     </>
