@@ -1,6 +1,12 @@
+"use client";
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt, FaGithub, FaLinkedin , FaExternalLinkAlt } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
+
+gsap.registerPlugin(ScrollTrigger);
 function Contact() {
   const contact = [
       {
@@ -41,12 +47,111 @@ function Contact() {
     },
   ];
 
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const headingRef = useRef<HTMLHeadingElement | null>(null);
+  const subheadingRef = useRef<HTMLParagraphElement | null>(null);
+  const contactRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const socialRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const ctaRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // Headings
+      gsap.fromTo(
+        headingRef.current,
+        { y: -30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+      gsap.fromTo(
+        subheadingRef.current,
+        { y: -20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power2.out",
+          delay: 0.1,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // Contact cards stagger
+      gsap.fromTo(
+        contactRefs.current,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // Social cards stagger
+      gsap.fromTo(
+        socialRefs.current,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 50%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // CTA
+      gsap.fromTo(
+        ctaRef.current,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ctaRef.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="px-6 py-12">
-      <h2 className="text-4xl md:text-4xl font-bold text-center text-white mb-4">
+    <div ref={containerRef} className="px-6 py-12">
+      <h2 ref={headingRef} className="text-4xl md:text-4xl font-bold text-center text-white mb-4">
         Let&apos;s Work Together
       </h2>
-      <p className="text-gray-400 text-center mb-10">
+      <p ref={subheadingRef} className="text-gray-400 text-center mb-10">
         If you have a project in mind or just want to say hi, feel free to reach out!
       </p>
 
@@ -56,6 +161,7 @@ function Contact() {
           return (
             <div
               key={i}
+              ref={(el) => { contactRefs.current[i] = el; }}
               className="flex flex-col items-center justify-center gap-3 w-110 px-20 py-8 rounded-xl border border-cyan-600/30 bg-[#0d1117] text-cyan-400 shadow-xl/30 hover:shadow-cyan-400/50 hover:scale-105 transition duration-300"
             >
               <div className="p-4 bg-cyan-200/10 border border-cyan-600/40 rounded-full">
@@ -82,6 +188,7 @@ function Contact() {
           return (
             <div
               key={i}
+              ref={(el) => { socialRefs.current[i] = el; }}
               className="flex flex-col gap-4 w-auto px-12 py-8 rounded-xl border border-cyan-600/30 bg-[#0d1117] text-cyan-400 shadow-xl/30 hover:shadow-cyan-400/50 hover:scale-105 transition duration-300"
             >
               <div className="flex flex-row items-center gap-3">
@@ -117,14 +224,14 @@ function Contact() {
         })}
       </div>
 
-      <div id="CTA" className="mt-20 p-10 flex flex-col items-center justify-center gap-4 text-center">
+      <div ref={ctaRef} id="CTA" className="mt-20 p-10 flex flex-col items-center justify-center gap-4 text-center">
         <h3 className="text-3xl text-white">Your Next Project Starts Here</h3>
         <p>Let&apos;s collaborate to bring your ideas to life. Reach out today!</p>
         <div className="flex flex-row sm:flex-row gap-4 mt-4">
-          <a href="" className="px-15 py-3 border border-cyan-600/30 rounded-3xl flex items-center gap-2 hover:bg-cyan-600/10 transition duration-500 hover:scale-105 hover:shadow-xl hover:shadow-cyan-600/30">
+          <a href="mailto:abdallaomran566@gmail.com" target="_blank" className="px-15 py-3 border border-cyan-600/30 rounded-3xl flex items-center gap-2 hover:bg-cyan-600/10 transition duration-500 hover:scale-105 hover:shadow-xl hover:shadow-cyan-600/30">
             <HiOutlineMail size={20} /> Send me an email
           </a>
-          <a href="" className="px-15 py-3 border border-cyan-600/30 rounded-3xl flex items-center gap-2 hover:bg-cyan-600/10 transition duration-500 hover:scale-105 hover:shadow-xl hover:shadow-cyan-600/30">
+          <a href="https://linkedin.com/in/abdalla-omran-388572361" target="_blank" className="px-15 py-3 border border-cyan-600/30 rounded-3xl flex items-center gap-2 hover:bg-cyan-600/10 transition duration-500 hover:scale-105 hover:shadow-xl hover:shadow-cyan-600/30">
             <FaLinkedin size={20} /> connect on LinkedIn
           </a>
         </div>
