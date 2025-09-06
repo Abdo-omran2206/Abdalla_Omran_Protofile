@@ -31,6 +31,11 @@ interface Video {
 }
 gsap.registerPlugin(ScrollTrigger);
 
+type HoverableElement = HTMLElement & {
+  __enterHandler?: (ev: Event) => void;
+  __leaveHandler?: (ev: Event) => void;
+};
+
 function Portfolio(){
     const [ webData , setWebData ] = useState<Array<Project>>([]);
     const [ videoData , setVideoData ] = useState<Array<Video>>([]);
@@ -101,8 +106,12 @@ function Portfolio(){
         if (currentState === 'video') setVideoData(result);
         if (currentState === 'tech') setTeckData(result);
 
-      } catch (err: any) {
-        setError(err?.message || 'Failed to load data');
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Failed to load data');
+        }
         setWebData([]);
         setVideoData([]);
         setTeckData([]);
@@ -145,8 +154,12 @@ function Portfolio(){
         if (failed.length) {
           setError(`Failed to load: ${failed.join(', ')}`);
         }
-      } catch (err: any) {
-        setError(err?.message || 'Failed to load data');
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Failed to load data');
+        }
         setWebData([]);
         setVideoData([]);
         setTeckData([]);
@@ -299,15 +312,15 @@ function RenderWebApp({ data } : { data: Array<Project> }) {
       const onLeave = () => leave(card);
       card.addEventListener('mouseenter', onEnter);
       card.addEventListener('mouseleave', onLeave);
-      (card as any).__enterHandler = onEnter;
-      (card as any).__leaveHandler = onLeave;
+      (card as HoverableElement).__enterHandler = onEnter;
+      (card as HoverableElement).__leaveHandler = onLeave;
     });
     return () => {
       cards.forEach((card) => {
-        const onEnter = (card as any).__enterHandler;
-        const onLeave = (card as any).__leaveHandler;
-        card.removeEventListener('mouseenter', onEnter);
-        card.removeEventListener('mouseleave', onLeave);
+        const onEnter = (card as HoverableElement).__enterHandler;
+        const onLeave = (card as HoverableElement).__leaveHandler;
+        if (onEnter) card.removeEventListener('mouseenter', onEnter as EventListener);
+        if (onLeave) card.removeEventListener('mouseleave', onLeave as EventListener);
       });
     };
   }, [filteredData]);
@@ -455,15 +468,15 @@ function RenderVideoApp({ data } : { data: Array<Video> }) {
             const onLeave = () => leave(card);
             card.addEventListener('mouseenter', onEnter);
             card.addEventListener('mouseleave', onLeave);
-            (card as any).__enterHandler = onEnter;
-            (card as any).__leaveHandler = onLeave;
+            (card as HoverableElement).__enterHandler = onEnter;
+            (card as HoverableElement).__leaveHandler = onLeave;
         });
         return () => {
             cards.forEach((card) => {
-                const onEnter = (card as any).__enterHandler;
-                const onLeave = (card as any).__leaveHandler;
-                card.removeEventListener('mouseenter', onEnter);
-                card.removeEventListener('mouseleave', onLeave);
+                const onEnter = (card as HoverableElement).__enterHandler;
+                const onLeave = (card as HoverableElement).__leaveHandler;
+                if (onEnter) card.removeEventListener('mouseenter', onEnter as EventListener);
+                if (onLeave) card.removeEventListener('mouseleave', onLeave as EventListener);
             });
         };
     }, [data]);
@@ -519,15 +532,15 @@ function RenderTechStack({data} : {data: Array<Tech>}){
             const onLeave = () => leave(card);
             card.addEventListener('mouseenter', onEnter);
             card.addEventListener('mouseleave', onLeave);
-            (card as any).__enterHandler = onEnter;
-            (card as any).__leaveHandler = onLeave;
+            (card as HoverableElement).__enterHandler = onEnter;
+            (card as HoverableElement).__leaveHandler = onLeave;
         });
         return () => {
             cards.forEach((card) => {
-                const onEnter = (card as any).__enterHandler;
-                const onLeave = (card as any).__leaveHandler;
-                card.removeEventListener('mouseenter', onEnter);
-                card.removeEventListener('mouseleave', onLeave);
+                const onEnter = (card as HoverableElement).__enterHandler;
+                const onLeave = (card as HoverableElement).__leaveHandler;
+                if (onEnter) card.removeEventListener('mouseenter', onEnter as EventListener);
+                if (onLeave) card.removeEventListener('mouseleave', onLeave as EventListener);
             });
         };
     }, [data]);
