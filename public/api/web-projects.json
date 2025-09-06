@@ -1,0 +1,123 @@
+[
+  {
+    "name": "Archer E-Bank",
+    "description": "A modern, full-stack digital banking application. Archer enables users to register, log in, manage virtual Visa cards, transfer money, request payments, and receive real-time notifications—all in a sleek, responsive interface.",
+    "livedimo": false,
+    "livedimourl": "",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/ArcherE-Bank",
+    "tecuse": ["React", "Node.js", "Next.js", "Tailwind CSS", "Express", "MySQL", "socket.io"],
+    "image": "/web-dev/archer e-bank.png",
+    "type": "fullstack"
+  },
+  {
+    "name": "Katalog",
+    "description": "Katalog is a heartfelt digital legacy platform that allows users to create, store, and deliver personal messages to their loved ones after their passing.",
+    "livedimo": true,
+    "livedimourl": "https://katalog-blond.vercel.app/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/Katalog",
+    "tecuse": ["React", "Node.js", "Next.js", "Tailwind CSS", "supabase", "framer-motion", "postgres"],
+    "image": "/web-dev/Katalog.png",
+    "type": "fullstack"
+  },
+  {
+    "name": "ATOM Hospital",
+    "description": "ATOM-Hospital is a project for managing hospital operations, including patient and staff management, appointment scheduling, and healthcare workflows.",
+    "livedimo": true,
+    "livedimourl": "https://atom-hospital.ct.ws/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/ATOM-Hospital",
+    "tecuse": ["HTML", "CSS", "JavaScript", "PHP", "jquery", "MySQL"],
+    "image": "/web-dev/atom-workspace-receptionist.png",
+    "type": "fullstack"
+  },
+  {
+    "name": "Coffee Break",
+    "description": "Coffee Break - Cozy Coffee Shop Website is a modern, responsive website designed for a coffee shop, featuring an elegant layout, menu display, and user-friendly navigation. It provides an inviting online presence for coffee enthusiasts.",
+    "livedimo": true,
+    "livedimourl": "https://coffee-break.ct.ws/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/coffee-break",
+    "tecuse": ["HTML", "CSS", "JavaScript", "PHP", "jquery", "MySQL"],
+    "image": "/web-dev/coffee-break-ct-ws.png",
+    "type": "fullstack"
+  },
+  {
+    "name": "Burger Smash",
+    "description": "A modern, interactive burger restaurant website built with Next.js, featuring stunning 3D graphics, smooth animations, and a responsive design.",
+    "livedimo": true,
+    "livedimourl": "https://burger-smash.vercel.app/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/Burger-Smash",
+    "tecuse": ["React", "Node.js", "Next.js", "Tailwind CSS", "three.js", "framer-motion"],
+    "image": "/web-dev/burger-smash.png",
+    "type": "frontend"
+  },
+  {
+    "name": "qrcode-gen-master",
+    "description": "qrcode-gen-master is a web application that allows users to generate QR codes easily. It features a user-friendly interface and supports various customization options for QR codes.",
+    "livedimo": true,
+    "livedimourl": "https://qrcode-gen-master.netlify.app/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/qrcode-gen-master",
+    "tecuse": ["React", "Node.js", "Next.js"],
+    "image": "/web-dev/qrcode-gen-master.png",
+    "type": "frontend"
+  },
+  {
+    "name": "Administration Panel",
+    "description": "A financial administration panel that allows users to track payments, calculate balances, manage financial records, and search transactions.",
+    "livedimo": true,
+    "livedimourl": "https://abdo-omran2206.github.io/Administration_Panal/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/Administration_Panal",
+    "tecuse": ["HTML", "CSS", "JavaScript"],
+    "image": "/web-dev/admin.png",
+    "type": "frontend"
+  },
+  {
+    "name": "Noble Plate",
+    "description": "Noble Plate is a modern, responsive restaurant website that highlights fine dining with elegant design and easy navigation. It offers users an engaging look at the restaurant’s brand, menu, and ambiance.",
+    "livedimo": true,
+    "livedimourl": "https://abdo-omran2206.github.io/Noble_Plate/", 
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/Noble_Plate",
+    "tecuse": ["HTML", "CSS", "JavaScript"],
+    "image": "/web-dev/github-io-Noble-Plate.png",
+    "type": "frontend"
+  },
+  {
+    "name": "EchoPress",
+    "description": "EchoPress is a modern, responsive blog website that emphasizes clean design and user-friendly navigation. It provides an engaging platform for users to explore various topics, read articles, and interact with content.",
+    "livedimo": true,
+    "livedimourl": "https://abdo-omran2206.github.io/EchoPress/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/EchoPress",
+    "tecuse": ["HTML", "CSS", "JavaScript"],
+    "image": "/web-dev/github-io-EchoPress.png",
+    "type": "frontend"
+  },
+  {
+    "name": "Link-Archive",
+    "description": "A modern, responsive web app to store, search, and manage your favorite links",
+    "livedimo": true,
+    "livedimourl": "https://abdo-omran2206.github.io/Link-Archive/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/Link-Archive",
+    "tecuse": ["HTML", "Tailwind CSS", "JavaScript", "jquery"],
+    "image": "/web-dev/Link-Archive.png",
+    "type": "frontend"
+  },
+  {
+    "name": "Coupa Volunteers Force",
+    "description": "Coupa Volunteers Force is a web application designed to facilitate volunteer management and coordination. It features a user-friendly interface for both volunteers and organizers, enabling easy sign-ups, event management, and communication.",
+    "livedimo": true,
+    "livedimourl": "https://cvf-volunteers.ct.ws/",
+    "sourse": false,
+    "github": "",
+    "tecuse": ["HTML", "CSS", "JavaScript"],
+    "image": "/web-dev/Coupa Volunteers.png",
+    "type": "frontend"
+  }
+]
