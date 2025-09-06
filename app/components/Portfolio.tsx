@@ -242,6 +242,10 @@ export default Portfolio;
 
 
 function RenderWebApp({ data } : { data: Array<Project> }) {
+  const [typeFilter, setTypeFilter] = useState<string>('All');
+  const types = Array.from(new Set((data || []).map((d) => d.type).filter(Boolean))).sort();
+  const filteredData = typeFilter === 'All' ? data : data.filter((d) => d.type === typeFilter);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>('.portfolio-card').forEach((card, i) => {
@@ -264,7 +268,7 @@ function RenderWebApp({ data } : { data: Array<Project> }) {
       });
     });
     return () => ctx.revert();
-  }, [data]);
+  }, [filteredData]);
 
   useEffect(() => {
     const cards = document.querySelectorAll<HTMLElement>('.portfolio-card');
@@ -290,13 +294,30 @@ function RenderWebApp({ data } : { data: Array<Project> }) {
         card.removeEventListener('mouseleave', onLeave);
       });
     };
-  }, [data]);
+  }, [filteredData]);
 
   return (
     <>
       {data ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10">
-          {data.map((item, index) => (
+        <>
+          <div className="flex justify-center mb-6 px-10">
+            <ul className="flex flex-wrap gap-5 text-sm md:text-base font-semibold rounded-2xl text-white bg-white/10 backdrop-blur-md shadow-lg border border-white/20 px-10 py-2">
+              {['All', ...types].map((t) => {
+                const isActive = t === typeFilter;
+                return (
+                  <li
+                    key={t}
+                    onClick={() => setTypeFilter(t)}
+                    className={`${isActive ? 'bg-cyan-600 text-white' : 'text-cyan-400 hover:bg-cyan-400/20'} cursor-pointer px-3 py-1 rounded-lg border border-cyan-600 transition`}
+                  >
+                    {t}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10">
+          {filteredData.map((item, index) => (
             <div
               key={index}
               className="portfolio-card bg-[#0d1117] transition rounded-xl shadow-lg hover:bg-[#19212e] will-change-transform"
@@ -321,7 +342,7 @@ function RenderWebApp({ data } : { data: Array<Project> }) {
                       {item.name}
                     </h3>
                   )}
-                  <span className="px-3 py-1 text-sm rounded-full border border-cyan-600 text-cyan-400 hover:bg-cyan-400/20 hover:cursor-pointer transition duration-500 hover:shadow-xl/20 hover:shadow-cyan-400/70">
+                  <span onClick={() => setTypeFilter(item.type)} className="px-3 py-1 text-sm rounded-full border border-cyan-600 text-cyan-400 hover:bg-cyan-400/20 hover:cursor-pointer transition duration-500 hover:shadow-xl/20 hover:shadow-cyan-400/70">
                     {item.type}
                   </span>
                 </div>
@@ -377,6 +398,7 @@ function RenderWebApp({ data } : { data: Array<Project> }) {
             </div>
           ))}
         </div>
+        </>
       ) : (
         <p>No projects found.</p>
       )}
