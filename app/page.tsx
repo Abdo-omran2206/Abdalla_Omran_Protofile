@@ -106,7 +106,7 @@ export default function Home() {
 }
 
 
-export function Navbar() {
+function Navbar() {
   const item =
     "relative text-gray-200 overflow-hidden transition-all duration-300 ease-in-out m-1 cursor-pointer \
 before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%] \
@@ -165,7 +165,7 @@ hover:before:w-full hover:text-white max-sm:text-sm";
   );
 }
 
-export function SocialLinks() {
+function SocialLinks() {
   return (
     <div className="flex justify-center">
       <div className="flex space-x-6 px-8 py-4 rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-xl gap-5">
