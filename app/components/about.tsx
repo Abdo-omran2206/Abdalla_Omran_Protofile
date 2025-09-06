@@ -26,16 +26,16 @@ function About() {
       .fromTo(TextRef.current, { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power2.out", }, "-=0.5");
   }, []);
   return (
-    <div ref={cardRef} className="w-screen h-auto px-6 py-16 flex flex-col items-center">
+    <div ref={cardRef} className="w-screen h-auto px-6  flex flex-col items-center">
       {/* Heading */}
-      <h2 ref={Head} className="text-4xl md:text-5xl font-bold text-center text-white mb-5">About Me</h2>
+      <h2 ref={Head} className="text-5xl max-sm:text-4xl font-bold text-center text-white mb-5">About Me</h2>
       {/* Tagline */}
       <p ref={Headp} className="text-md text-gray-200 leading-relaxed max-w-3xl text-center mb-20">
         Turning ideas into immersive, high‑performance experiences
       </p>
 
       {/* Split Layout */}
-      <div className="flex flex-row gap-12 max-w-7xl w-screen justify-center items-center">
+      <div className="flex flex-row gap-12 max-w-7xl w-screen justify-center items-center max-sm:flex-col">
         {/* Left: Image */}
         <div ref={ImageRef} className="flex justify-center">
           <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-white/5 backdrop-blur-sm p-2 flex justify-center items-center hover:shadow-2xl hover:shadow-white/50 transition duration-500 ">
@@ -44,16 +44,16 @@ function About() {
               alt="profile picture"
               height={420}
               width={420}
-              className="w-200 h-full rounded-xl object-cover hover:scale-[1.05] transition-transform duration-300"
+              className="w-200 h-full rounded-xl object-cover hover:scale-[1.05] transition-transform duration-300 max-sm:w-150"
               priority
             />
           </div>
         </div>
 
         {/* Right: Text */}
-        <div ref={TextRef} className="flex flex-col space-y-8">
+        <div ref={TextRef} className="flex flex-col space-y-8 max-sm:text-center max-sm:items-center max-sm:space-y-1 max-sm:px-5">
           {/* Intro */}
-          <div>
+          <div className='max-sm:mb-5'>
             <h3 className="text-2xl md:text-3xl font-semibold text-white mb-2">Who I am</h3>
             <p className="text-md text-gray-300 leading-relaxed text-left">
                 I’m a <span className="font-semibold text-white">Frontend Developer and Video Editor </span> 
@@ -62,7 +62,7 @@ function About() {
                 polished and alive, complete with fluid animations and interactivity.
             </p>
 
-            <p className="text-md text-gray-300 leading-relaxed text-left mt-2">
+            <p className="text-md text-gray-300 leading-relaxed text-left mt-2 ">
                 With a focus on <span className="font-medium text-white">performance</span>, 
                 clean architecture, and pixel-perfect execution, I ensure products work 
                 seamlessly across devices. Beyond code, I craft video edits that balance 
@@ -70,7 +70,7 @@ function About() {
                 with clarity.
             </p>
 
-            <p className="text-md text-gray-300 leading-relaxed text-left mt-2">
+            <p className="text-md text-gray-300 leading-relaxed text-left mt-2 ">
                 Whether coding an interface or producing a cinematic cut, I adapt style and 
                 technique to the goal, always aiming to deliver work that feels both 
                 <span className="italic text-white"> creative and precise</span>.
