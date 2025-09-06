@@ -158,18 +158,29 @@ function Portfolio(){
     useEffect(() =>{
         fetchAllData();
     },[])
-    const nav = "relative flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl scale-105 text-white shadow-xl \
-             before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%] \
-             before:w-full before:h-1 before:bg-cyan-600 before:origin-center before:scale-x-0 \
-             before:transition-transform before:duration-500 hover:before:scale-x-100";
-    const navActive = "flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl scale-105 before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%] before:w-full before:h-1 before:bg-cyan-600 text-white shadow-xl";
+    const nav = `
+      relative flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl text-white shadow-xl
+      before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%]
+      before:w-full before:h-1 before:bg-cyan-600 before:origin-center before:scale-x-0
+      before:transition-transform before:duration-500 hover:before:scale-x-100
+      hover:scale-105
+      max-sm:flex max-sm:flex-col max-sm:items-center max-sm:gap-1 max-sm:p-1
+    `;
+
+    const navActive = `
+      relative flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl text-white shadow-xl
+      before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%]
+      before:w-full before:h-1 before:bg-cyan-600 before:scale-x-100
+      scale-105
+      max-sm:flex max-sm:flex-col max-sm:items-center max-sm:gap-1 max-sm:p-1
+    `;
     return(
         <div ref={cardRef} className="w-screen min-h-screen h-auto py-20">
-            <h2 ref={Head} className="text-5xl text-center text-white mb-3">Portfolio Showcase</h2>
-            <p ref={Headp} className="text-center">Explore my journey through projects, certifications, and technical expertise. Each section represents a milestone in my continuous learning path.</p>
-            <div ref={Nav} className="flex justify-center p-10">
+            <h2 ref={Head} className="text-5xl text-center text-white mb-3 max-sm:text-3xl">Portfolio Showcase</h2>
+            <p ref={Headp} className="text-center max-sm:text-sm">Explore my journey through projects, certifications, and technical expertise. Each section represents a milestone in my continuous learning path.</p>
+            <div ref={Nav} className="flex justify-center p-10 max-sm:px-5 max-sm:py-3">
                 <ul className="flex flex-row px-20 py-5 gap-20 text-2xl font-bold rounded-2xl 
-                   text-white bg-white/10 backdrop-blur-md shadow-lg border border-white/20">
+                   text-white bg-white/10 backdrop-blur-md shadow-lg border border-white/20 max-sm:gap-5 max-sm:px-5 max-sm:py-2 max-sm:text-sm">
                     <li onClick={async () => {
                         if(contentRef.current){
                             await gsap.to(contentRef.current, { opacity: 0, y: 10, duration: 0.25, ease: 'power2.out' });
@@ -522,10 +533,10 @@ function RenderTechStack({data} : {data: Array<Tech>}){
                     <FiZap size={32} className="text-cyan-400" />
                     TECH STACK
                 </h3>
-                <p>A comprehensive overview of my technical expertise and capabilities</p>
+                <p className="text-center">A comprehensive overview of my technical expertise and capabilities</p>
 
 
-                <div className="grid grid-cols-5 gap-4 mt-6 px-2">
+                <div className="grid grid-cols-5 max-md:grid-cols-3 max-sm:grid-cols-2 gap-4 mt-6 px-2">
                     {data.map((tech, i) => {
                     const Icon = Icons[tech.icon as keyof typeof Icons];
                     return (

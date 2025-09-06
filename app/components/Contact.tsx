@@ -147,22 +147,22 @@ function Contact() {
   }, []);
 
   return (
-    <div ref={containerRef} className="px-6 py-12">
-      <h2 ref={headingRef} className="text-4xl md:text-4xl font-bold text-center text-white mb-4">
+    <div ref={containerRef} className="px-6 py-12 ">
+      <h2 ref={headingRef} className="text-4xl font-bold text-center text-white mb-4 max-sm:text-3xl">
         Let&apos;s Work Together
       </h2>
-      <p ref={subheadingRef} className="text-gray-400 text-center mb-10">
+      <p ref={subheadingRef} className="text-gray-400 text-center mb-10 max-sm:text-sm">
         If you have a project in mind or just want to say hi, feel free to reach out!
       </p>
 
-      <div className="flex flex-wrap justify-center gap-5">
+      <div className="flex flex-wrap justify-center gap-5 max-sm:px-5">
         {contact.map((item, i) => {
           const Icon = item.icon;
           return (
             <div
               key={i}
               ref={(el) => { contactRefs.current[i] = el; }}
-              className="flex flex-col items-center justify-center gap-3 w-110 px-20 py-8 rounded-xl border border-cyan-600/30 bg-[#0d1117] text-cyan-400 shadow-xl/30 hover:shadow-cyan-400/50 hover:scale-105 transition duration-300"
+              className="flex flex-col items-center justify-center gap-3 w-110 px-20 py-8 rounded-xl border border-cyan-600/30 bg-[#0d1117] text-cyan-400 shadow-xl/30 hover:shadow-cyan-400/50 hover:scale-105 transition duration-300 max-sm:w-full max-sm:px-5 max-sm:py-6"
             >
               <div className="p-4 bg-cyan-200/10 border border-cyan-600/40 rounded-full">
                 <Icon 
@@ -228,12 +228,30 @@ function Contact() {
         <h3 className="text-3xl text-white">Your Next Project Starts Here</h3>
         <p>Let&apos;s collaborate to bring your ideas to life. Reach out today!</p>
         <div className="flex flex-row sm:flex-row gap-4 mt-4">
-          <a href="mailto:abdallaomran566@gmail.com" target="_blank" className="px-15 py-3 border border-cyan-600/30 rounded-3xl flex items-center gap-2 hover:bg-cyan-600/10 transition duration-500 hover:scale-105 hover:shadow-xl hover:shadow-cyan-600/30">
+          <a
+            href="mailto:abdallaomran566@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-12 py-3 border border-cyan-600/30 rounded-3xl flex items-center gap-2 
+                      hover:bg-cyan-600/10 transition duration-500 hover:scale-105 
+                      hover:shadow-xl hover:shadow-cyan-600/30 
+                      max-sm:px-8 max-sm:flex max-sm:flex-wrap max-sm:items-center justify-center"
+          >
             <HiOutlineMail size={20} /> Send me an email
           </a>
-          <a href="https://linkedin.com/in/abdalla-omran-388572361" target="_blank" className="px-15 py-3 border border-cyan-600/30 rounded-3xl flex items-center gap-2 hover:bg-cyan-600/10 transition duration-500 hover:scale-105 hover:shadow-xl hover:shadow-cyan-600/30">
-            <FaLinkedin size={20} /> connect on LinkedIn
+
+          <a
+            href="https://linkedin.com/in/abdalla-omran-388572361"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-12 py-3 border border-cyan-600/30 rounded-3xl flex items-center gap-2 
+                      hover:bg-cyan-600/10 transition duration-500 hover:scale-105 
+                      hover:shadow-xl hover:shadow-cyan-600/30 
+                      max-sm:px-8 max-sm:flex max-sm:flex-wrap max-sm:items-center justify-center"
+          >
+            <FaLinkedin size={20} /> Connect on LinkedIn
           </a>
+
         </div>
       </div>
     </div>
