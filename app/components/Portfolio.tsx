@@ -159,28 +159,33 @@ function Portfolio(){
         fetchAllData();
     },[])
     const nav = `
-      relative flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl text-white shadow-xl
+      relative flex items-center gap-2 cursor-pointer 
+      px-3 py-2 sm:px-4 sm:py-2 md:px-5 md:py-3 
+      rounded-xl text-white shadow-xl text-sm sm:text-base lg:text-lg
       before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%]
       before:w-full before:h-1 before:bg-cyan-600 before:origin-center before:scale-x-0
       before:transition-transform before:duration-500 hover:before:scale-x-100
-      hover:scale-105
-      max-sm:flex max-sm:flex-col max-sm:items-center max-sm:gap-1 max-sm:p-1
+      hover:scale-105 transition-all duration-300
+      flex-col gap-1 sm:flex-row sm:gap-2
     `;
 
     const navActive = `
-      relative flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl text-white shadow-xl
+      relative flex items-center gap-2 cursor-pointer 
+      px-3 py-2 sm:px-4 sm:py-2 md:px-5 md:py-3 
+      rounded-xl text-white shadow-xl text-sm sm:text-base lg:text-lg
       before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%]
       before:w-full before:h-1 before:bg-cyan-600 before:scale-x-100
-      scale-105
-      max-sm:flex max-sm:flex-col max-sm:items-center max-sm:gap-1 max-sm:p-1
+      scale-105 transition-all duration-300
+      flex-col gap-1 sm:flex-row sm:gap-2
     `;
+
     return(
         <div ref={cardRef} className="w-screen min-h-screen h-auto py-20">
             <h2 ref={Head} className="text-5xl text-center text-white mb-3 max-sm:text-3xl">Portfolio Showcase</h2>
             <p ref={Headp} className="text-center max-sm:text-sm">Explore my journey through projects, certifications, and technical expertise. Each section represents a milestone in my continuous learning path.</p>
             <div ref={Nav} className="flex justify-center p-10 max-sm:px-5 max-sm:py-3">
                 <ul className="flex flex-row px-20 py-5 gap-20 text-2xl font-bold rounded-2xl 
-                   text-white bg-white/10 backdrop-blur-md shadow-lg border border-white/20 max-sm:gap-5 max-sm:px-5 max-sm:py-2 max-sm:text-sm">
+                   text-white bg-white/10 backdrop-blur-md shadow-lg border border-white/20 max-sm:gap-5 max-sm:px-5 max-sm:py-2 max-sm:text-sm max-md:text-md">
                     <li onClick={async () => {
                         if(contentRef.current){
                             await gsap.to(contentRef.current, { opacity: 0, y: 10, duration: 0.25, ease: 'power2.out' });
