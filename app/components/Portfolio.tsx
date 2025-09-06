@@ -16,6 +16,7 @@ interface Project {
   github?: string;
   tecuse?: string[];
   image:string;
+  type:string;
   // Add more fields as needed
 }
 interface Tech {
@@ -31,10 +32,12 @@ interface Video {
 gsap.registerPlugin(ScrollTrigger);
 
 function Portfolio(){
-    const [ state , setState ] = useState("Web");
-    const [ data , setData ] = useState<Array<Project | Tech | Video>>([]);
+    const [ webData , setWebData ] = useState<Array<Project>>([]);
+    const [ videoData , setVideoData ] = useState<Array<Video>>([]);
+    const [ teckData , setTeckData ] = useState<Array<Tech>>([]);
     const [ loading , setLoading ] = useState<boolean>(false);
     const [ error , setError ] = useState<string | null>(null);
+    const [ state , setState ] = useState<string>("Web");
 
     const cardRef = useRef(null);
     const Head = useRef(null);
@@ -64,40 +67,97 @@ function Portfolio(){
           { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
         );
       }
-    }, [state, loading, error])
+    }, [loading, error])
     
     const fetchData = async (currentState: string) => {
-        try{
-            setLoading(true);
-            setError(null);
-            let url = '';
-            if(currentState === "Web"){ url = '/api/web-projects.json'; }
-            else if(currentState === "Video"){ url = '/api/video-projects.json'; }
-            else if(currentState === "Tech"){ url = '/api/tech-stack.json'; }
+      try {
+        setLoading(true);
+        setError(null);
 
-            if(!url){
-                setData([]);
-                return;
-            }
+        // Map state to the correct URL
+        const urlMap: Record<string, string> = {
+          web: '/api/web-projects.json',
+          video: '/api/video-projects.json',
+          tech: '/api/tech-stack.json',
+        };
 
-            const response = await fetch(url);
-            if(!response.ok){
-                throw new Error(`Failed to load: ${response.status}`);
-            }
-            const result = await response.json();
-            setData(result);
-        }catch(err : any){
-            setError(err?.message || 'Failed to load data');
-            setData([]);
-        }finally{
-            setLoading(false);
+        const url = urlMap[currentState];
+        if (!url) {
+          setWebData([]);
+          setVideoData([]);
+          setTeckData([]);
+          return;
         }
+
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Failed to load: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        // Assign to the right state
+        if (currentState === 'web') setWebData(result);
+        if (currentState === 'video') setVideoData(result);
+        if (currentState === 'tech') setTeckData(result);
+
+      } catch (err: any) {
+        setError(err?.message || 'Failed to load data');
+        setWebData([]);
+        setVideoData([]);
+        setTeckData([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchAllData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const requests = [
+          fetch('/api/web-projects.json'),
+          fetch('/api/video-projects.json'),
+          fetch('/api/tech-stack.json'),
+        ];
+
+        const responses = await Promise.allSettled(requests);
+        const [webRes, videoRes, techRes] = responses;
+
+        if (webRes.status === 'fulfilled' && webRes.value.ok) {
+          const data = await webRes.value.json();
+          setWebData(data);
+        }
+        if (videoRes.status === 'fulfilled' && videoRes.value.ok) {
+          const data = await videoRes.value.json();
+          setVideoData(data);
+        }
+        if (techRes.status === 'fulfilled' && techRes.value.ok) {
+          const data = await techRes.value.json();
+          setTeckData(data);
+        }
+
+        const failed: string[] = [];
+        if (webRes.status === 'rejected' || (webRes.status === 'fulfilled' && !webRes.value.ok)) failed.push('web');
+        if (videoRes.status === 'rejected' || (videoRes.status === 'fulfilled' && !videoRes.value.ok)) failed.push('video');
+        if (techRes.status === 'rejected' || (techRes.status === 'fulfilled' && !techRes.value.ok)) failed.push('tech');
+        if (failed.length) {
+          setError(`Failed to load: ${failed.join(', ')}`);
+        }
+      } catch (err: any) {
+        setError(err?.message || 'Failed to load data');
+        setWebData([]);
+        setVideoData([]);
+        setTeckData([]);
+      } finally {
+        setLoading(false);
+      }
     };
 
     useEffect(() =>{
-        fetchData(state);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[state])
+        fetchAllData();
+    },[])
     const nav = "relative flex items-center gap-2 cursor-pointer px-4 py-2 rounded-xl scale-105 text-white shadow-xl \
              before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%] \
              before:w-full before:h-1 before:bg-cyan-600 before:origin-center before:scale-x-0 \
@@ -114,6 +174,7 @@ function Portfolio(){
                         if(contentRef.current){
                             await gsap.to(contentRef.current, { opacity: 0, y: 10, duration: 0.25, ease: 'power2.out' });
                         }
+                        await fetchData('web');
                         setState("Web");
                     }} className={state === "Web" ? navActive : nav}>
                         <FiGlobe className="text-blue-400" /> <span>Web Projects</span>
@@ -122,6 +183,7 @@ function Portfolio(){
                         if(contentRef.current){
                             await gsap.to(contentRef.current, { opacity: 0, y: 10, duration: 0.25, ease: 'power2.out' });
                         }
+                        await fetchData('video');
                         setState("Video");
                     }} className={state === "Video" ? navActive : nav}>
                           <FiVideo className="text-red-400" /> <span>Video Projects</span>
@@ -130,6 +192,7 @@ function Portfolio(){
                         if(contentRef.current){
                             await gsap.to(contentRef.current, { opacity: 0, y: 10, duration: 0.25, ease: 'power2.out' });
                         }
+                        await fetchData('tech');
                         setState("Tech");
                     }} className={state === "Tech" ? navActive : nav}>
                         <FiCpu className="text-green-400 block"/> <span>Tech Stack</span>
@@ -139,7 +202,7 @@ function Portfolio(){
             <div ref={contentRef} className="will-change-transform">
                 { state === "Web" ? (
                     <RenderWebApp
-                        data={data.filter(
+                        data={webData.filter(
                             (item): item is Project =>
                                 typeof item === "object" &&
                                 "name" in item &&
@@ -150,7 +213,7 @@ function Portfolio(){
                     />
                 ) : state === "Video" ? (
                     <RenderVideoApp
-                        data={data.filter(
+                        data={videoData.filter(
                             (item): item is Video =>
                                 typeof item === "object" &&
                                 "title" in item &&
@@ -159,7 +222,7 @@ function Portfolio(){
                     />
                  ) : state === "Tech" ? (
                     <RenderTechStack
-                        data={data.filter(
+                        data={teckData.filter(
                             (item): item is Tech =>
                                 typeof item === "object" &&
                                 "name" in item &&
@@ -259,7 +322,7 @@ function RenderWebApp({ data } : { data: Array<Project> }) {
                     </h3>
                   )}
                   <span className="px-3 py-1 text-sm rounded-full border border-cyan-600 text-cyan-400 hover:bg-cyan-400/20 hover:cursor-pointer transition duration-500 hover:shadow-xl/20 hover:shadow-cyan-400/70">
-                    Web-app
+                    {item.type}
                   </span>
                 </div>
 
