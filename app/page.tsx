@@ -42,9 +42,9 @@ export default function Home() {
           <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-center z-10 px-6 md:px-12 h-screen gap-4 md:gap-0 lg:gap-10">
             <div className='w-full z-20 px-6 flex flex-col justify-center items-center text-center'>
               <div ref={text1} className="opacity-0">
-                <h1 className="text-gray-200 text-2xl font-bold mb-4 leading-tight lg:leading-[1.1]">Hello, I&apos;m</h1>
-                <h1 className="text-white text-7xl mb-4 leading-tight lg:leading-[1.1]">Abdalla Omran</h1>
-                <TextType 
+                <h1 className="text-gray-200 text-2xl font-bold mb-4 leading-tight lg:leading-[1.1] max-sm:text-lg">Hello, I&apos;m</h1>
+                <h1 className="text-white text-7xl mb-4 leading-tight lg:leading-[1.1] max-sm:text-4xl">Abdalla Omran</h1>
+                <TextType
                   text={[
                     "Full-Stack Developer",
                     "Video Editor",
@@ -54,20 +54,23 @@ export default function Home() {
                   deletingSpeed={35}
                   showCursor={true}
                   cursorCharacter="█"
-                  className='text-3xl mt-2 mb-5'
+                  className='text-3xl mt-2 mb-5 max-sm:text-xl text-cyan-400 font-semibold'
                 />
-                <p className="text-white text-xl font-medium">Transforming Ideas Into Reality</p>
+                <p className="text-white text-xl font-medium max-sm:text-lg">Transforming Ideas Into Reality</p>
               </div>
               <div className='flex flex-col gap-8 opacity-0' ref={text2}>
-                <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-start flex-wrap">
-                <a href="#Portfolio" className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/0 hover:text-white hover:border-white hover:border duration-300 transition">View Portfolio</a>
+                <div className="mt-10 flex flex-row items-center gap-6 max-sm:gap-3 justify-start">
+                <a href="#Portfolio" 
+                className="px-8 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/0 hover:text-white hover:border-white hover:border duration-300 transition max-sm:text-sm max-sm:px-4 max-sm:py-2"
+                >View Portfolio
+                </a>
                 <a
                   href="#Contact"
-                  className="relative px-6 py-3 rounded-full border border-white text-white font-semibold 
+                  className="relative px-8 py-3 rounded-full border border-white text-white font-semibold 
                             overflow-hidden transition-colors duration-300
                             before:content-[''] before:absolute before:inset-0 before:bg-white 
                             before:scale-x-0 before:origin-left before:transition-transform before:duration-300
-                            hover:before:scale-x-100 hover:text-black"
+                            hover:before:scale-x-100 hover:text-black max-sm:text-sm max-sm:px-4 max-sm:py-2"
                 >
                   <span className="relative z-10">Contact Me</span>
                 </a>
@@ -103,27 +106,63 @@ export default function Home() {
 }
 
 
-
-export function Navbar(){
-  const item = "relative text-gary-200 overflow-hidden transition-all duration-300 ease-in-out p-3 m-1 cursor-pointer \
+export function Navbar() {
+  const item =
+    "relative text-gray-200 overflow-hidden transition-all duration-300 ease-in-out m-1 cursor-pointer \
 before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%] \
 before:w-0 before:h-1 before:bg-cyan-600 before:transition-all before:duration-300 before:ease-in-out \
-hover:before:w-full hover:text-white hover:text-shadow-lg/20 hover:text-shadow-white max-sm:px-2";
+hover:before:w-full hover:text-white max-sm:text-sm";
 
-  const nav = useRef(null);
+  const nav = useRef<HTMLElement | null>(null);
+  const listItems = useRef<HTMLLIElement[]>([]);
+
   useEffect(() => {
-    gsap.fromTo(nav.current, { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" });
+    if (nav.current) {
+      gsap.fromTo(
+        nav.current,
+        { y: -100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.2, ease: "power2.out" }
+      );
+    }
+
+    if (listItems.current.length > 0) {
+      gsap.fromTo(
+        listItems.current,
+        { y: -20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.15,
+          duration: 0.8,
+          delay: 0.3,
+          ease: "power2.out",
+        }
+      );
+    }
   }, []);
-  return(
-    <nav ref={nav} className="fixed  top-5 left-1/2 -translate-x-1/2 px-10 py-3 bg-transparent backdrop-blur-lg rounded-3xl border border-gray-700 z-50 opacity-0">
-      <ul className="flex gap-20 font-bold text-xl">
-        <li><a href="#Home" className={item}>Home</a></li>
-        <li><a href="#About" className={item}>About</a></li>
-        <li><a href="#Portfolio" className={item}>Portfolio</a></li>
-        <li><a href="#Contact" className={item}>Contact</a></li>
+
+  return (
+    <nav
+      ref={nav}
+      role="navigation"
+      aria-label="Main Navigation"
+      className="fixed top-5 left-1/2 -translate-x-1/2 px-10 py-3 bg-transparent backdrop-blur-lg rounded-3xl border border-gray-700 z-50 opacity-0 max-md:px-6 max-md:py-2 max-sm:px-3 max-sm:py-1 max-sm:top-3"
+    >
+      <ul className="flex gap-20 font-bold text-xl max-sm:gap-4">
+        {["Home", "About", "Portfolio", "Contact"].map((link, i) => (
+          <li
+            key={link}
+            ref={(el) => {
+              if (el) listItems.current[i] = el;
+            }}
+            className={item}
+          >
+            <a href={`#${link}`}>{link}</a>
+          </li>
+        ))}
       </ul>
     </nav>
-  )
+  );
 }
 
 export function SocialLinks() {
