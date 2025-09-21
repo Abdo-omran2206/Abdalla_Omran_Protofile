@@ -1,5 +1,16 @@
 [
   {
+    "name": "Movie Night",
+    "description": "Movie Night is a responsive web app for discovering movies, from trending blockbusters to hidden gems. It features cast details, ratings, and summaries in a sleek dark theme optimized for all devices.",
+    "livedimo": true,
+    "livedimourl": "https://abdo-omran2206.github.io/Movie-Night/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/Movie-Night",
+    "tecuse": ["HTML", "CSS", "JavaScript", "jquery"],
+    "image": "/web-dev/movie-night.png",
+    "type": "frontend"
+  },
+  {
     "name": "Archer E-Bank",
     "description": "A modern, full-stack digital banking application. Archer enables users to register, log in, manage virtual Visa cards, transfer money, request payments, and receive real-time notifications—all in a sleek, responsive interface.",
     "livedimo": false,
