@@ -227,7 +227,7 @@ function Contact() {
       <div ref={ctaRef} id="CTA" className="mt-20 p-10 flex flex-col items-center justify-center gap-4 text-center">
         <h3 className="text-3xl text-white">Your Next Project Starts Here</h3>
         <p>Let&apos;s collaborate to bring your ideas to life. Reach out today!</p>
-        <div className="flex flex-row sm:flex-row gap-4 mt-4">
+        <div className="flex flex-row sm:flex-row gap-4 mt-4 max-sm:flex-wrap max-sm:justify-center">
           <a
             href="mailto:abdallaomran566@gmail.com"
             target="_blank"
