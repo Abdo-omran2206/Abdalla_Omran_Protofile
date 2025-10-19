@@ -1,5 +1,49 @@
 [
   {
+    "name": "Movie Night App",
+    "description": "Movie Night - your ultimate companion for discovering and tracking movies and TV shows! This modern mobile application is built with React Native and Expo, offering a seamless experience for movie enthusiasts.",
+    "livedimo": true,
+    "livedimourl": "https://github.com/Abdo-omran2206/Movie-Night/releases/tag/v1.0.0",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/Movie-Night/tree/android",
+    "tecuse": ["React-Native","Expo","TypeScript","sqlite3"],
+    "image": "/web-dev/movie-night-app.jpg",
+    "type": "Mobile"
+  },
+  {
+    "name": "PlayStation Café Management System",
+    "description": "PlayStation Café Management System is a comprehensive solution for managing a PlayStation gaming café. It includes features for user registration, game management, and session tracking.",
+    "livedimo": true,
+    "livedimourl": "https://github.com/Abdo-omran2206/PlayTime/releases/tag/PlayTime",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/PlayTime",
+    "tecuse": ["Python3","tkinter","sqlite3"],
+    "image": "/web-dev/Playtime.ico",
+    "type": "Desktop"
+  },
+  {
+    "name": "DTMF_Detection",
+    "description": "DTMF_Detection is a Python-based application for detecting Dual-Tone Multi-Frequency (DTMF) signals in audio files. It utilizes libraries such as NumPy and WAV for efficient audio processing.",
+    "livedimo": false,
+    "livedimourl": "",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/DTMF_Detection",
+    "tecuse": ["Python3","numpy","wav"],
+    "image": "/web-dev/DTMF_Detection.svg",
+    "type": "CLI"
+  },
+  {
+    "name": "RESTIFY",
+    "description": "A Windows-friendly work/rest timer with keyboard lock during rest",
+    "livedimo": true,
+    "livedimourl": "https://github.com/Abdo-omran2206/RESTIFY/releases/tag/v1.0.0",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/RESTIFY",
+    "tecuse": ["Python3","tkinter"],
+    "image": "/web-dev/RESTIFY.jpg",
+    "type": "Desktop"
+  },
+  {
     "name": "Movie Night",
     "description": "Movie Night is a responsive web app for discovering movies, from trending blockbusters to hidden gems. It features cast details, ratings, and summaries in a sleek dark theme optimized for all devices.",
     "livedimo": true,
@@ -8,7 +52,7 @@
     "github": "https://github.com/Abdo-omran2206/Movie-Night",
     "tecuse": ["HTML", "CSS", "JavaScript", "jquery"],
     "image": "/web-dev/movie-night.png",
-    "type": "frontend"
+    "type": "Frontend"
   },
   {
     "name": "Archer E-Bank",
@@ -19,7 +63,7 @@
     "github": "https://github.com/Abdo-omran2206/ArcherE-Bank",
     "tecuse": ["React", "Node.js", "Next.js", "Tailwind CSS", "Express", "MySQL", "socket.io"],
     "image": "/web-dev/archer e-bank.png",
-    "type": "fullstack"
+    "type": "Fullstack"
   },
   {
     "name": "Katalog",
@@ -30,7 +74,7 @@
     "github": "https://github.com/Abdo-omran2206/Katalog",
     "tecuse": ["React", "Node.js", "Next.js", "Tailwind CSS", "supabase", "framer-motion", "postgres"],
     "image": "/web-dev/Katalog.png",
-    "type": "fullstack"
+    "type": "Fullstack"
   },
   {
     "name": "ATOM Hospital",
@@ -41,7 +85,7 @@
     "github": "https://github.com/Abdo-omran2206/ATOM-Hospital",
     "tecuse": ["HTML", "CSS", "JavaScript", "PHP", "jquery", "MySQL"],
     "image": "/web-dev/atom-workspace-receptionist.png",
-    "type": "fullstack"
+    "type": "Fullstack"
   },
   {
     "name": "Coffee Break",
@@ -52,7 +96,7 @@
     "github": "https://github.com/Abdo-omran2206/coffee-break",
     "tecuse": ["HTML", "CSS", "JavaScript", "PHP", "jquery", "MySQL"],
     "image": "/web-dev/coffee-break-ct-ws.png",
-    "type": "fullstack"
+    "type": "Fullstack"
   },
   {
     "name": "Burger Smash",
@@ -63,7 +107,7 @@
     "github": "https://github.com/Abdo-omran2206/Burger-Smash",
     "tecuse": ["React", "Node.js", "Next.js", "Tailwind CSS", "three.js", "framer-motion"],
     "image": "/web-dev/burger-smash.png",
-    "type": "frontend"
+    "type": "Frontend"
   },
   {
     "name": "qrcode-gen-master",
@@ -74,7 +118,7 @@
     "github": "https://github.com/Abdo-omran2206/qrcode-gen-master",
     "tecuse": ["React", "Node.js", "Next.js"],
     "image": "/web-dev/qrcode-gen-master.png",
-    "type": "frontend"
+    "type": "Frontend"
   },
   {
     "name": "Administration Panel",
@@ -85,7 +129,7 @@
     "github": "https://github.com/Abdo-omran2206/Administration_Panal",
     "tecuse": ["HTML", "CSS", "JavaScript"],
     "image": "/web-dev/admin.png",
-    "type": "frontend"
+    "type": "Frontend"
   },
   {
     "name": "Noble Plate",
@@ -96,7 +140,7 @@
     "github": "https://github.com/Abdo-omran2206/Noble_Plate",
     "tecuse": ["HTML", "CSS", "JavaScript"],
     "image": "/web-dev/github-io-Noble-Plate.png",
-    "type": "frontend"
+    "type": "Frontend"
   },
   {
     "name": "EchoPress",
@@ -107,7 +151,7 @@
     "github": "https://github.com/Abdo-omran2206/EchoPress",
     "tecuse": ["HTML", "CSS", "JavaScript"],
     "image": "/web-dev/github-io-EchoPress.png",
-    "type": "frontend"
+    "type": "Frontend"
   },
   {
     "name": "Link-Archive",
@@ -118,7 +162,7 @@
     "github": "https://github.com/Abdo-omran2206/Link-Archive",
     "tecuse": ["HTML", "Tailwind CSS", "JavaScript", "jquery"],
     "image": "/web-dev/Link-Archive.png",
-    "type": "frontend"
+    "type": "Frontend"
   },
   {
     "name": "Coupa Volunteers Force",
@@ -129,6 +173,6 @@
     "github": "",
     "tecuse": ["HTML", "CSS", "JavaScript"],
     "image": "/web-dev/Coupa Volunteers.png",
-    "type": "frontend"
+    "type": "Frontend"
   }
 ]
