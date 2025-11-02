@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 👋 Hi, I'm Abdalla Omran
 
-## Getting Started
+**Full-Stack Developer & Video Editor**
 
-First, run the development server:
+A passionate developer and creative professional building modern web experiences and crafting engaging video content.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🎯 About Me
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I'm a Frontend Developer and Video Editor passionate about creating fast, engaging digital experiences. I blend design sense with engineering to build responsive, accessible interfaces that feel polished and alive, complete with fluid animations and interactivity.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+With a focus on performance, clean architecture, and pixel-perfect execution, I ensure products work seamlessly across devices. Beyond code, I craft video edits that balance pacing, motion, sound, and story—capturing attention and communicating with clarity.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Turning ideas into immersive, high‑performance experiences** ✨
 
-## Learn More
+## 🚀 What I Do
 
-To learn more about Next.js, take a look at the following resources:
+- 🌐 **Web Development**: Building responsive, accessible web applications
+- 🎬 **Video Editing**: Creating engaging video content with cinematic cuts
+- 🎨 **UI/UX Design**: Crafting intuitive and beautiful user interfaces
+- ⚡ **Performance Optimization**: Ensuring fast, efficient applications
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💼 My Portfolio
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This portfolio showcases:
+- Web development projects with modern tech stacks
+- Video editing work and creative projects
+- Skills in full-stack development
+- Interactive animations and user experiences
 
-## Deploy on Vercel
+## 🛠️ Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Frontend:**
+- React · Next.js · TypeScript
+- Tailwind CSS · GSAP
+- React Icons · OGL
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Tools & Libraries:**
+- Git · GitHub
+- Video Editing Software
+- Responsive Design
+- Web Performance
+
+## 📂 Featured Projects
+
+Explore my work in the portfolio section to see:
+- Interactive web applications
+- Responsive user interfaces
+- Video editing showcases
+- Full-stack development projects
+
+## 📬 Let's Connect
+
+I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+
+- **LinkedIn**: [Abdalla Omran](https://www.linkedin.com/in/abdalla-omran-388572361/)
+- **GitHub**: [@Abdo-omran2206](https://github.com/Abdo-omran2206)
+- **WhatsApp**: [+201155395273](https://wa.me/201155395273)
+
+---
+
+**Let's build something amazing together!** 🚀
+
+*Built with Next.js, TypeScript, and GSAP*
