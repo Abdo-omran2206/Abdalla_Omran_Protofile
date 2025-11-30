@@ -1,4 +1,27 @@
 [
+
+  {
+    "name": "Movie Night App",
+    "description": "CarCrafters is a modern, premium car dealership and rental platform built with cutting-edge web technologies. The platform offers an immersive browsing experience with stunning animations, interactive 3D car previews, and a fully responsive design optimized for all devices.",
+    "livedimo": true,
+    "livedimourl": "https://carcrafters.netlify.app/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/CarCrafters",
+    "tecuse": ["React","Node.js","TypeScript","Next.js","Tailwind CSS","three.js","framer-motion"],
+    "image": "/web-dev/CarCrafters.png",
+    "type": "Frontend"
+  },
+  {
+    "name": "KnokKnok",
+    "description": "KnokKnok is a comprehensive network and security scanning tool that provides various functionalities for network reconnaissance, web scanning, and information gathering.",
+    "livedimo": false,
+    "livedimourl": "",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/knokknok",
+    "tecuse": ["Python3","requests","beautifulsoup4","phonebook"],
+    "image": "/web-dev/KnokKnok.png",
+    "type": "CLI"
+  },
   {
     "name": "Movie Night App",
     "description": "Movie Night - your ultimate companion for discovering and tracking movies and TV shows! This modern mobile application is built with React Native and Expo, offering a seamless experience for movie enthusiasts.",
