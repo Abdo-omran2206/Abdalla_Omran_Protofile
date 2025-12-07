@@ -1,6 +1,17 @@
 [
 
   {
+    "name": "DishDrop",
+    "description": "DishDrop is a modern, responsive web application designed to help food enthusiasts discover, explore, and cook delicious recipes from around the world. Built with vanilla JavaScript and powered by TheMealDB API, DishDrop offers an intuitive interface for browsing thousands of recipes, ingredients, and cuisines.",
+    "livedimo": true,
+    "livedimourl": "https://abdo-omran2206.github.io/DishDrop/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/DishDrop",
+    "tecuse": ["HTML","CSS","JavaScript","jquery","AOS","themealdb"],
+    "image": "/web-dev/DishDrop.png",
+    "type": "Frontend"
+  },
+  {
     "name": "CarCrafters",
     "description": "CarCrafters is a modern, premium car dealership and rental platform built with cutting-edge web technologies. The platform offers an immersive browsing experience with stunning animations, interactive 3D car previews, and a fully responsive design optimized for all devices.",
     "livedimo": true,
@@ -29,7 +40,7 @@
     "livedimourl": "https://github.com/Abdo-omran2206/Movie-Night/releases/tag/v1.0.0",
     "sourse": true,
     "github": "https://github.com/Abdo-omran2206/Movie-Night/tree/android",
-    "tecuse": ["React-Native","Expo","TypeScript","sqlite3"],
+    "tecuse": ["React-Native","Expo","TypeScript","sqlite3","TMDB"],
     "image": "/web-dev/movie-night-app.jpg",
     "type": "Mobile"
   },
@@ -73,7 +84,7 @@
     "livedimourl": "https://abdo-omran2206.github.io/Movie-Night/",
     "sourse": true,
     "github": "https://github.com/Abdo-omran2206/Movie-Night",
-    "tecuse": ["HTML", "CSS", "JavaScript", "jquery"],
+    "tecuse": ["HTML", "CSS", "JavaScript", "jquery","TMDB"],
     "image": "/web-dev/movie-night.png",
     "type": "Frontend"
   },
