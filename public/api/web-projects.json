@@ -1,5 +1,15 @@
 [
-
+  {
+    "name": "GamePortal",
+    "description": "GamePortal is a modern, responsive web application that serves as a hub for discovering and playing free online games. Built with React and Next.js, it features a sleek design, smooth animations, and an intuitive interface for browsing a wide variety of games.",
+    "livedimo": true,
+    "livedimourl": "https://gameportal-next.netlify.app/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/GamePortal",
+    "tecuse": ["React","Next.js","Node.js","Tailwind CSS","framer-motion","freegameapi"],
+    "image": "/web-dev/GamePortal.png",
+    "type": "Frontend"
+  },
   {
     "name": "DishDrop",
     "description": "DishDrop is a modern, responsive web application designed to help food enthusiasts discover, explore, and cook delicious recipes from around the world. Built with vanilla JavaScript and powered by TheMealDB API, DishDrop offers an intuitive interface for browsing thousands of recipes, ingredients, and cuisines.",
