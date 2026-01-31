@@ -3,7 +3,7 @@
     "name": "MacBook Pro",
     "description": "A premium, high-performance marketing landing page for the MacBook Pro, built with Next.js, React Three Fiber, and GSAP. This project showcases modern web development techniques, featuring interactive 3D models and smooth, scroll-triggered animations.",
     "livedimo": true,
-    "livedimourl": "https://macbook-pro-kappa.vercel.app/",
+    "livedimourl": "https://macbook-pro-apple.vercel.app/",
     "sourse": true,
     "github": "https://github.com/Abdo-omran2206/MacBook_Pro",
     "tecuse": ["React","Next.js","Node.js","Tailwind CSS","GSAP","three.js"],
