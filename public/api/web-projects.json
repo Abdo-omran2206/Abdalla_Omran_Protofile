@@ -1,5 +1,27 @@
 [
   {
+    "name": "MacBook Pro",
+    "description": "A premium, high-performance marketing landing page for the MacBook Pro, built with Next.js, React Three Fiber, and GSAP. This project showcases modern web development techniques, featuring interactive 3D models and smooth, scroll-triggered animations.",
+    "livedimo": true,
+    "livedimourl": "https://macbook-pro-kappa.vercel.app/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/MacBook_Pro",
+    "tecuse": ["React","Next.js","Node.js","Tailwind CSS","GSAP","three.js"],
+    "image": "/web-dev/MacBook-Pro.png",
+    "type": "Frontend"
+  },
+  {
+    "name": "KuroX",
+    "description": "A modern, high-performance anime discovery platform built with Next.js and Tailwind CSS. Explore trending series, search for your favorites, and dive into detailed anime information with a beautiful, premium dark interface.",
+    "livedimo": true,
+    "livedimourl": "https://kuro-x.netlify.app/",
+    "sourse": true,
+    "github": "https://github.com/Abdo-omran2206/kuroX",
+    "tecuse": ["React","Next.js","Node.js","Tailwind CSS","axios","jikan-api","react-icon","swiper.js"],
+    "image": "/web-dev/kuroX.png",
+    "type": "Frontend"
+  },
+  {
     "name": "GamePortal",
     "description": "GamePortal is a modern, responsive web application that serves as a hub for discovering and playing free online games. Built with React and Next.js, it features a sleek design, smooth animations, and an intuitive interface for browsing a wide variety of games.",
     "livedimo": true,
