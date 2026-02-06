@@ -6,6 +6,9 @@ import { FiGlobe, FiVideo, FiCpu, FiGithub, FiZap } from "react-icons/fi";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import * as Icons from "react-icons/si";
 import Image from "next/image";
+import webProjects from "../api/web-projects";
+import videoProjects from "../api/video-projects";
+import techStack from "../api/tech-stack";
 
 interface Project {
   name: string;
@@ -37,11 +40,9 @@ type HoverableElement = HTMLElement & {
 };
 
 function Portfolio() {
-  const [webData, setWebData] = useState<Array<Project>>([]);
-  const [videoData, setVideoData] = useState<Array<Video>>([]);
-  const [teckData, setTeckData] = useState<Array<Tech>>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [webData, setWebData] = useState<Array<Project>>(webProjects);
+  const [videoData, setVideoData] = useState<Array<Video>>(videoProjects);
+  const [teckData, setTeckData] = useState<Array<Tech>>(techStack);
   const [state, setState] = useState<string>("Web");
 
   const cardRef = useRef(null);
@@ -51,8 +52,9 @@ function Portfolio() {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   // Memoized class names
-  const navClasses = useMemo(() => ({
-    base: `
+  const navClasses = useMemo(
+    () => ({
+      base: `
       relative flex items-center justify-center gap-1.5 cursor-pointer 
       px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 
       rounded-lg sm:rounded-xl text-white shadow-lg text-xs sm:text-sm md:text-base lg:text-lg
@@ -61,15 +63,17 @@ function Portfolio() {
       before:transition-transform before:duration-500 hover:before:scale-x-100
       hover:scale-105 transition-all duration-300
     `,
-    active: `
+      active: `
       relative flex items-center justify-center gap-1.5 cursor-pointer 
       px-3 py-2 sm:px-4 sm:py-2.5 md:px-6 md:py-3 
       rounded-lg sm:rounded-xl text-white shadow-lg text-xs sm:text-sm md:text-base lg:text-lg
       before:content-[''] before:absolute before:bottom-0 before:left-1/2 before:translate-x-[-50%]
       before:w-full before:h-0.5 sm:before:h-1 before:bg-cyan-500 before:scale-x-100
       scale-105 transition-all duration-300
-    `
-  }), []);
+    `,
+    }),
+    [],
+  );
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -83,100 +87,36 @@ function Portfolio() {
     tl.fromTo(
       Head.current,
       { y: -50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" }
+      { y: 0, opacity: 1, duration: 1.5, ease: "power2.out" },
     )
       .fromTo(
         Headp.current,
         { y: -50, opacity: 0 },
         { y: 0, opacity: 1, duration: 1, ease: "power2.out" },
-        "-=1"
+        "-=1",
       )
       .fromTo(
         Nav.current,
         { y: -50, opacity: 0 },
         { y: 0, opacity: 1, duration: 1, ease: "power2.out" },
-        "-=0.5"
+        "-=0.5",
       );
 
     return () => {
       tl.kill();
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
 
   useEffect(() => {
-    if (!loading && !error && contentRef.current) {
+    if (contentRef.current) {
       gsap.fromTo(
         contentRef.current,
         { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
+        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
       );
     }
-  }, [loading, error, state]);
-
-  const fetchAllData = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const requests = [
-        fetch("/api/web-projects.json"),
-        fetch("/api/video-projects.json"),
-        fetch("/api/tech-stack.json"),
-      ];
-
-      const responses = await Promise.allSettled(requests);
-      const [webRes, videoRes, techRes] = responses;
-
-      if (webRes.status === "fulfilled" && webRes.value.ok) {
-        const data = await webRes.value.json();
-        setWebData(data);
-      }
-      if (videoRes.status === "fulfilled" && videoRes.value.ok) {
-        const data = await videoRes.value.json();
-        setVideoData(data);
-      }
-      if (techRes.status === "fulfilled" && techRes.value.ok) {
-        const data = await techRes.value.json();
-        setTeckData(data);
-      }
-
-      const failed: string[] = [];
-      if (
-        webRes.status === "rejected" ||
-        (webRes.status === "fulfilled" && !webRes.value.ok)
-      )
-        failed.push("web");
-      if (
-        videoRes.status === "rejected" ||
-        (videoRes.status === "fulfilled" && !videoRes.value.ok)
-      )
-        failed.push("video");
-      if (
-        techRes.status === "rejected" ||
-        (techRes.status === "fulfilled" && !techRes.value.ok)
-      )
-        failed.push("tech");
-      if (failed.length) {
-        setError(`Failed to load: ${failed.join(", ")}`);
-      }
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Failed to load data");
-      }
-      setWebData([]);
-      setVideoData([]);
-      setTeckData([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchAllData();
-  }, []);
+  }, [state]);
 
   const handleTabChange = (newState: string) => {
     if (contentRef.current) {
@@ -185,7 +125,7 @@ function Portfolio() {
         y: 10,
         duration: 0.25,
         ease: "power2.out",
-        onComplete: () => setState(newState)
+        onComplete: () => setState(newState),
       });
     } else {
       setState(newState);
@@ -193,25 +133,25 @@ function Portfolio() {
   };
 
   return (
-    <div ref={cardRef} className="w-full min-h-screen h-auto py-10 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
+    <div
+      ref={cardRef}
+      className="w-full min-h-screen h-auto py-10 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8"
+    >
       <h2
         ref={Head}
         className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center text-white mb-2 sm:mb-3 font-bold"
       >
         Portfolio Showcase
       </h2>
-      <p 
-        ref={Headp} 
+      <p
+        ref={Headp}
         className="text-center text-gray-300 text-sm sm:text-base md:text-lg max-w-3xl mx-auto px-4"
       >
         Explore my journey through projects, certifications, and technical
         expertise. Each section represents a milestone in my continuous learning
         path.
       </p>
-      <div
-        ref={Nav}
-        className="flex justify-center py-6 sm:py-8 md:py-10"
-      >
+      <div ref={Nav} className="flex justify-center py-6 sm:py-8 md:py-10">
         <ul
           className="flex flex-row flex-wrap justify-center px-3 py-3 sm:px-6 sm:py-4 md:px-10 md:py-5 
           gap-2 sm:gap-4 md:gap-8 lg:gap-12 text-sm sm:text-base md:text-lg font-bold rounded-xl sm:rounded-2xl 
@@ -231,7 +171,9 @@ function Portfolio() {
           <li>
             <button
               onClick={() => handleTabChange("Video")}
-              className={state === "Video" ? navClasses.active : navClasses.base}
+              className={
+                state === "Video" ? navClasses.active : navClasses.base
+              }
             >
               <FiVideo className="text-red-400 text-sm sm:text-base md:text-lg" />
               <span className="hidden sm:inline">Video Projects</span>
@@ -252,20 +194,8 @@ function Portfolio() {
         </ul>
       </div>
 
-      {loading && (
-        <div className="text-center text-white py-20">
-          <p className="text-lg">Loading...</p>
-        </div>
-      )}
-
-      {error && (
-        <div className="text-center text-red-400 py-10">
-          <p className="text-base sm:text-lg">{error}</p>
-        </div>
-      )}
-
       <div ref={contentRef} className="will-change-transform">
-        {state === "Web" && !loading && (
+        {state === "Web" && (
           <RenderWebApp
             data={webData.filter(
               (item): item is Project =>
@@ -273,23 +203,25 @@ function Portfolio() {
                 "name" in item &&
                 "livedimo" in item &&
                 "sourse" in item &&
-                "image" in item
+                "image" in item,
             )}
           />
         )}
-        {state === "Video" && !loading && (
+        {state === "Video" && (
           <RenderVideoApp
             data={videoData.filter(
               (item): item is Video =>
-                typeof item === "object" && "title" in item && "videoId" in item
+                typeof item === "object" &&
+                "title" in item &&
+                "videoId" in item,
             )}
           />
         )}
-        {state === "Tech" && !loading && (
+        {state === "Tech" && (
           <RenderTechStack
             data={teckData.filter(
               (item): item is Tech =>
-                typeof item === "object" && "name" in item && "icon" in item
+                typeof item === "object" && "name" in item && "icon" in item,
             )}
           />
         )}
@@ -303,7 +235,7 @@ export default Portfolio;
 function RenderWebApp({ data }: { data: Array<Project> }) {
   const [typeFilter, setTypeFilter] = useState<string>("All");
   const types = Array.from(
-    new Set((data || []).map((d) => d.type).filter(Boolean))
+    new Set((data || []).map((d) => d.type).filter(Boolean)),
   ).sort();
   const filteredData =
     typeFilter === "All" ? data : data.filter((d) => d.type === typeFilter);
@@ -325,7 +257,7 @@ function RenderWebApp({ data }: { data: Array<Project> }) {
               start: "top 85%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       });
     });
@@ -334,12 +266,22 @@ function RenderWebApp({ data }: { data: Array<Project> }) {
 
   useEffect(() => {
     const cards = document.querySelectorAll<HTMLElement>(".portfolio-card");
-    const handlers = new Map<HTMLElement, { enter: () => void; leave: () => void }>();
+    const handlers = new Map<
+      HTMLElement,
+      { enter: () => void; leave: () => void }
+    >();
 
     cards.forEach((card) => {
-      const enter = () => gsap.to(card, { scale: 1.03, y: -4, duration: 0.2, ease: "power2.out" });
-      const leave = () => gsap.to(card, { scale: 1, y: 0, duration: 0.25, ease: "power2.out" });
-      
+      const enter = () =>
+        gsap.to(card, {
+          scale: 1.03,
+          y: -4,
+          duration: 0.2,
+          ease: "power2.out",
+        });
+      const leave = () =>
+        gsap.to(card, { scale: 1, y: 0, duration: 0.25, ease: "power2.out" });
+
       handlers.set(card, { enter, leave });
       card.addEventListener("mouseenter", enter);
       card.addEventListener("mouseleave", leave);
@@ -486,7 +428,7 @@ function RenderVideoApp({ data }: { data: Array<Video> }) {
               start: "top 85%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       });
     });
@@ -495,12 +437,17 @@ function RenderVideoApp({ data }: { data: Array<Video> }) {
 
   useEffect(() => {
     const cards = document.querySelectorAll<HTMLElement>(".video-card");
-    const handlers = new Map<HTMLElement, { enter: () => void; leave: () => void }>();
+    const handlers = new Map<
+      HTMLElement,
+      { enter: () => void; leave: () => void }
+    >();
 
     cards.forEach((card) => {
-      const enter = () => gsap.to(card, { scale: 1.02, duration: 0.2, ease: "power2.out" });
-      const leave = () => gsap.to(card, { scale: 1, duration: 0.25, ease: "power2.out" });
-      
+      const enter = () =>
+        gsap.to(card, { scale: 1.02, duration: 0.2, ease: "power2.out" });
+      const leave = () =>
+        gsap.to(card, { scale: 1, duration: 0.25, ease: "power2.out" });
+
       handlers.set(card, { enter, leave });
       card.addEventListener("mouseenter", enter);
       card.addEventListener("mouseleave", leave);
@@ -568,7 +515,7 @@ function RenderTechStack({ data }: { data: Array<Tech> }) {
               start: "top 90%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       });
     });
@@ -577,12 +524,17 @@ function RenderTechStack({ data }: { data: Array<Tech> }) {
 
   useEffect(() => {
     const cards = document.querySelectorAll<HTMLElement>(".tech-card");
-    const handlers = new Map<HTMLElement, { enter: () => void; leave: () => void }>();
+    const handlers = new Map<
+      HTMLElement,
+      { enter: () => void; leave: () => void }
+    >();
 
     cards.forEach((card) => {
-      const enter = () => gsap.to(card, { scale: 1.05, duration: 0.15, ease: "power2.out" });
-      const leave = () => gsap.to(card, { scale: 1, duration: 0.2, ease: "power2.out" });
-      
+      const enter = () =>
+        gsap.to(card, { scale: 1.05, duration: 0.15, ease: "power2.out" });
+      const leave = () =>
+        gsap.to(card, { scale: 1, duration: 0.2, ease: "power2.out" });
+
       handlers.set(card, { enter, leave });
       card.addEventListener("mouseenter", enter);
       card.addEventListener("mouseleave", leave);
@@ -622,7 +574,12 @@ function RenderTechStack({ data }: { data: Array<Tech> }) {
               key={i}
               className="tech-card flex flex-col items-center justify-center gap-2 sm:gap-3 py-5 sm:py-6 md:py-7 px-4 sm:px-6 rounded-xl border border-cyan-600 bg-[#0d1117] text-cyan-400 shadow-md hover:shadow-cyan-400/50 hover:scale-105 transition duration-300 hover:cursor-pointer will-change-transform"
             >
-              {Icon && <Icon size={32} className="text-cyan-400 w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10" />}
+              {Icon && (
+                <Icon
+                  size={32}
+                  className="text-cyan-400 w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
+                />
+              )}
               <span className="font-medium text-xs sm:text-sm text-center">
                 {tech.name}
               </span>

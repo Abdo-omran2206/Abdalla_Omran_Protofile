@@ -1,0 +1,20 @@
+const techStack = [
+  { name: "HTML", icon: "SiHtml5" },
+  { name: "CSS", icon: "SiCss3" },
+  { name: "JavaScript", icon: "SiJavascript" },
+  { name: "PHP", icon: "SiPhp" },
+  { name: "MySQL", icon: "SiMysql" },
+  { name: "jQuery", icon: "SiJquery" },
+  { name: "TailwindCSS", icon: "SiTailwindcss" },
+  { name: "React", icon: "SiReact" },
+  { name: "NextJS", icon: "SiNextdotjs" },
+  { name: "Node", icon: "SiNodedotjs" },
+  { name: "Express", icon: "SiExpress" },
+  { name: "SQLite3", icon: "SiSqlite" },
+  { name: "Git", icon: "SiGit" },
+  { name: "GitHub", icon: "SiGithub" },
+  { name: "Supabase", icon: "SiSupabase" },
+  { name: "Python", icon: "SiPython" },
+];
+
+export default techStack;
