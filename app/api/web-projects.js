@@ -105,7 +105,7 @@ const webProjects = [
     sourse: true,
     github: "https://github.com/Abdo-omran2206/Movie-Night-app",
     tecuse: ["React-Native", "Expo", "TypeScript", "sqlite3", "TMDB","supabase","zustand"],
-    image: "/web-dev/movie-night-app.jpg",
+    image: "/web-dev/movie-night-app.png",
     type: "Mobile",
   },
   {
